@@ -34,8 +34,8 @@ public class SinglePlayerActivity extends AppCompatActivity{
         txtPlayer1 = findViewById(R.id.txtPlayer1);
         txtPlayer2 = findViewById(R.id.txtPlayer2);
 
-        player1 = new Player();
-        player2 = new Player("PC");
+        player1 = new Player(1);
+        player2 = new Player(2, "PC");
         //TODO: podemos ainda randomizar para ver quem comeca o jogo p.ex.
         board = new Board(player1);
 

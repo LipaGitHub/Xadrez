@@ -16,25 +16,24 @@ import pt.isec.tp.amov.Game.Pieces.Rook;
  */
 
 public class Player {
-    static int contador = 1;
-    int ID;
-    String nome;
+    private int ID;
+    private String nome;
     boolean firstMove;
-    Piece toMove;                 //peça a ser movida
-    int mode;   //0: REST; 1: MOVE; 2: ATTACK
-    ArrayList<Piece> pieces;
-    ArrayList<Integer> possibilidadesMover;
+    private Piece toMove;                 //peça a ser movida
+    private int mode;   //0: REST; 1: MOVE; 2: ATTACK
+    private ArrayList<Piece> pieces;
+    private ArrayList<Integer> possibilidadesMover;
 
-    public Player(){
-        this.ID = contador++;
+    public Player(int id){
+        this.ID = id;
         this.firstMove = true;
         this.mode = 0;
         this.pieces = new ArrayList<>();
         this.possibilidadesMover = new ArrayList<>();
     }
 
-    public Player(String nome) {
-        this.ID = contador++;
+    public Player(int id, String nome) {
+        this.ID = id;
         this.nome = nome;
         this.firstMove = true;
         this.mode = 0;
