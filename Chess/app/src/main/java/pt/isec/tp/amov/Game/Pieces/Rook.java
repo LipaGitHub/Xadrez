@@ -21,7 +21,7 @@ public class Rook extends Piece {
     public void move(Player p){
         p.setToMove(this);
         possibilidades.clear();
-        Piece peca = p.getToMove();
+        /*Piece peca = p.getToMove();
         int posP = peca.getX()*8+peca.getY();
 
         //guarda todas as possibilidades no array --> VERTICAL E HORIZONTAL
@@ -42,7 +42,7 @@ public class Rook extends Piece {
             if(getPossibilidades().get(i) == posP) {
                 possibilidades.remove(i);
             }
-        }
+        }*/
         p.setMode(1);
     }
 
@@ -57,12 +57,12 @@ public class Rook extends Piece {
         int linhaBegin = b.getToPlay().getToMove().getX()*8;
         int linhaEnd = ((b.getToPlay().getToMove().getX()+1)*8)-1;
         int colunaBegin = b.getToPlay().getToMove().getY();
-        int colunaEnd = b.getToPlay().getToMove().getX();
+        int colunaEnd = 7*8+b.getToPlay().getToMove().getY();
 
         int difDireita = linhaEnd - posAtualPeca;
         int difEsquerda = posAtualPeca - linhaBegin;
-        int difTop = Math.abs(posAtualPeca - linhaEnd);
-        int difBottom = Math.abs(difTop-colunaEnd);
+        int difTop = (posAtualPeca - b.getToPlay().getToMove().getY())/8;
+        int difBottom = (colunaEnd - posAtualPeca)/8;
 
         int total = 1;
         for(int i=0; i < difDireita;i++){
@@ -87,21 +87,21 @@ public class Rook extends Piece {
 
         total = 1;
         for(int i=0; i < difEsquerda;i++){
-            if(b.getTiles().get(posAtualPeca+total).isOccupied() == true) {
+            if(b.getTiles().get(posAtualPeca-total).isOccupied() == true) {
                 for (int j = 0; j < b.getToPlay().getPieces().size(); j++) {
-                    if (b.getTiles().get(posAtualPeca + total).getX() == b.getToPlay().getPieces().get(j).getX() &&
-                            b.getTiles().get(posAtualPeca + total).getY() == b.getToPlay().getPieces().get(j).getY()) {
+                    if (b.getTiles().get(posAtualPeca - total).getX() == b.getToPlay().getPieces().get(j).getX() &&
+                            b.getTiles().get(posAtualPeca - total).getY() == b.getToPlay().getPieces().get(j).getY()) {
                         discartar.add(posAtualPeca + total);
                         for(int k=posAtualPeca+total+1;k<=linhaEnd;k++)
                             discartar.add(k);
                         i = difEsquerda + 1; ///excluir tudo que esteja à frente
                         break;
                     }else{
-                        vermelhos.add(posAtualPeca+total);
+                        vermelhos.add(posAtualPeca-total);
                     }
                 }
             }else{
-                amarelos.add(posAtualPeca+total);
+                amarelos.add(posAtualPeca-total);
                 total++;
             }
         }
@@ -152,12 +152,17 @@ public class Rook extends Piece {
             }
         }
 
-        for(int i=0; i < possibilidades.size();i++){
+        /*for(int i=0; i < possibilidades.size();i++){
             for(int j=0; j < discartar.size();j++){
                 if(possibilidades.get(i) == discartar.get(j)) {
                     possibilidades.remove(i);
                 }
             }
+        }*/
+
+        possibilidades.clear();
+        for(int i=0; i < amarelos.size();i++){
+            possibilidades.add(amarelos.get(i));
         }
 
     }
