@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="txtSinglePlayer">MODE SIMPLE</string>
+    <string name="app_name">ECHECS</string>
+    <string name="txtChooseLanguage">Choisissez une langue</string>
+    <string name="txtMultiPlayer">MODE AVANCE</string>
+</resources>

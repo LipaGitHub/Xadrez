@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="txtSinglePlayer">MODO SIMPLES</string>
+    <string name="app_name">XADREZ</string>
+    <string name="txtChooseLanguage">Escolha a sua lingua</string>
+    <string name="txtMultiPlayer">MODO MULTIJOGADOR</string>
+</resources>

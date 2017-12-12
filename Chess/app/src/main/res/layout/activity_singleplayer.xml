@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/transparent">
+
+        <TextView
+            android:id="@+id/txtPlayer2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#24E"
+            android:gravity="center"
+            android:text="PLAYER 2"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:fontFamily="@font/rythmus_regular"/>
+
+        <GridView
+            android:id="@+id/grdvBoard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/board_brown"
+            android:cacheColorHint="@android:color/transparent"
+            android:foreground="@android:color/transparent"
+            android:foregroundTint="@android:color/transparent"
+            android:numColumns="8" />
+
+        <TextView
+            android:id="@+id/txtPlayer1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#24E"
+            android:gravity="center"
+            android:text="PLAYER 1"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:fontFamily="@font/rythmus_regular"/>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
