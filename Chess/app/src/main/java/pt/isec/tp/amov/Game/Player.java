@@ -106,8 +106,8 @@ public class Player {
             this.pieces.add(new Rook(Constants.ROOK_2, 0, 0));
             this.pieces.add(new Knight(Constants.KNIGHT_2, 0, 1));
             this.pieces.add(new Bishop(Constants.BISHOP_2, 0, 2));
-            this.pieces.add(new Queen(Constants.QUEEN_2, 0, 4));
-            this.pieces.add(new King(Constants.KING_2, 0, 3));
+            this.pieces.add(new Queen(Constants.QUEEN_2, 0, 3));
+            this.pieces.add(new King(Constants.KING_2, 0, 4));
             this.pieces.add(new Bishop(Constants.BISHOP_2, 0, 5));
             this.pieces.add(new Knight(Constants.KNIGHT_2, 0, 6));
             this.pieces.add(new Rook(Constants.ROOK_2, 0, 7));

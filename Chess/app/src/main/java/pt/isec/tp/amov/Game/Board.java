@@ -25,8 +25,6 @@ public class Board {
 
     Squares[][] board;
     ArrayList<Squares> tiles;
-    //ArrayList<Squares> tiles;
-    //ArrayList<Squares> squares;
     Player toPlay;
 
     public Board(Player p) {
@@ -92,21 +90,6 @@ public class Board {
                 }
             }
         }
-        /*int total = 0;
-        for(int i=0; i < 8; i++){ //LINHAS
-            for(int j=0; j < 8; j++) { //COLUNAS
-                //if(b.getTiles().get(total).isOccupied() == false) {
-                if ((i + j) % 2 == 0) {
-                    tiles.get(total).setColor(Constants.CREAM_TILE);
-                    board[i][j].setColor(Constants.CREAM_TILE);
-                } else {
-                    tiles.get(total).setColor(Constants.BROWN_TILE);
-                    board[i][j].setColor(Constants.BROWN_TILE);
-                }
-                //}
-                total++;
-            }
-        }*/
     }
 
     public void rePaintBoard(Board b) {
