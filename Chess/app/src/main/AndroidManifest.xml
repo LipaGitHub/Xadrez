@@ -15,8 +15,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SinglePlayerActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".SinglePlayerActivity"/>
         <activity android:name=".LanguageOptionActivity"/>
         <activity android:name=".MultiPlayerMenuActivity"/>
     </application>

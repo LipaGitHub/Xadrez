@@ -1,5 +1,6 @@
 package pt.isec.tp.amov.Game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import pt.isec.tp.amov.Constants;
@@ -15,7 +16,7 @@ import pt.isec.tp.amov.Game.Pieces.Rook;
  * Created by Fajardo on 12/12/2017.
  */
 
-public class Player {
+public class Player implements Serializable{
     private int ID;
     private String nome;
     boolean firstMove;

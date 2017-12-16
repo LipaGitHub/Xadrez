@@ -1,11 +1,14 @@
 package pt.isec.tp.amov.Game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import pt.isec.tp.amov.Constants;
 import pt.isec.tp.amov.Game.Pieces.Piece;
 
 import static pt.isec.tp.amov.Constants.ATTACK;
+import static pt.isec.tp.amov.Constants.BISHOP_1;
+import static pt.isec.tp.amov.Constants.BISHOP_2;
 import static pt.isec.tp.amov.Constants.ERRO;
 import static pt.isec.tp.amov.Constants.KING_1;
 import static pt.isec.tp.amov.Constants.KING_2;
@@ -14,6 +17,8 @@ import static pt.isec.tp.amov.Constants.KNIGHT_2;
 import static pt.isec.tp.amov.Constants.PAWN_1;
 import static pt.isec.tp.amov.Constants.PAWN_2;
 import static pt.isec.tp.amov.Constants.POSSIBLE_MOVE;
+import static pt.isec.tp.amov.Constants.QUEEN_1;
+import static pt.isec.tp.amov.Constants.QUEEN_2;
 import static pt.isec.tp.amov.Constants.ROOK_1;
 import static pt.isec.tp.amov.Constants.ROOK_2;
 
@@ -21,11 +26,11 @@ import static pt.isec.tp.amov.Constants.ROOK_2;
  * Created by Fajardo on 12/12/2017.
  */
 
-public class Board {
+public class Board implements Serializable {
 
     Squares[][] board;
-    ArrayList<Squares> tiles;
-    Player toPlay;
+    private ArrayList<Squares> tiles;
+    private Player toPlay;
 
     public Board(Player p) {
         this.board = new Squares[8][8];
@@ -153,6 +158,20 @@ public class Board {
                 case KING_2:
                     rePaintBoard(this);
                     peca.move(getToPlay());
+                    paintPossibleMoves(peca);
+                    break;
+                case BISHOP_1:
+                case BISHOP_2:
+                    rePaintBoard(this);
+                    peca.move(getToPlay());
+                    peca.limitar(this);
+                    paintPossibleMoves(peca);
+                    break;
+                case QUEEN_1:
+                case QUEEN_2:
+                    rePaintBoard(this);
+                    peca.move(getToPlay());
+                    peca.limitar(this);
                     paintPossibleMoves(peca);
                     break;
             }

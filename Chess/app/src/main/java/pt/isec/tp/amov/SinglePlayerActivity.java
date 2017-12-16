@@ -12,6 +12,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.Serializable;
+
 import pt.isec.tp.amov.Game.Board;
 import pt.isec.tp.amov.Game.Player;
 
@@ -30,48 +32,74 @@ public class SinglePlayerActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_singleplayer);
 
+        if(savedInstanceState != null
+                && (savedInstanceState.getSerializable("dados") != null)){
+            player1 = (Player) savedInstanceState.getSerializable("jog1");
+            player2 = (Player) savedInstanceState.getSerializable("jog2");
+            board = (Board) savedInstanceState.getSerializable("dados");
+            //boardGame.setAdapter(new GridViewAdapterSingle(this, board));
+            //txtPlayer2.setText(board.getToPlay().getNome());
+            //txtPlayer1.setText("OKAY");
+        }else {
+            txtPlayer1 = findViewById(R.id.txtPlayer1);
+            txtPlayer2 = findViewById(R.id.txtPlayer2);
 
-        txtPlayer1 = findViewById(R.id.txtPlayer1);
-        txtPlayer2 = findViewById(R.id.txtPlayer2);
+            player1 = new Player(1);
+            player2 = new Player(2, "PC");
+            //TODO: podemos ainda randomizar para ver quem comeca o jogo p.ex.
+            board = new Board(player1);
 
-        player1 = new Player(1);
-        player2 = new Player(2, "PC");
-        //TODO: podemos ainda randomizar para ver quem comeca o jogo p.ex.
-        board = new Board(player1);
+            player1.initializePieces();
+            player2.initializePieces();
 
-        player1.initializePieces();
-        player2.initializePieces();
+            board.createBoard();
+            board.paintBoard();
+            board.showPiecesOnBoard(player1, player2);
 
-        board.createBoard();
-        board.paintBoard();
-        board.showPiecesOnBoard(player1, player2);
+            boardGame = findViewById(R.id.grdvBoard);
+            boardGame.setNumColumns(8);
 
-        boardGame = findViewById(R.id.grdvBoard);
-        boardGame.setNumColumns(8);
+            txtPlayer2.setText(player2.getNome());
 
-        txtPlayer2.setText(player2.getNome());
+            boardGame.setAdapter(new GridViewAdapterSingle(this, board));
 
-        boardGame.setAdapter(new GridViewAdapterSingle(this, board));
+            boardGame.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    board.verifyMove(position);
+                    board.changePlayer(player1, player2);
+                    ((GridViewAdapterSingle) boardGame.getAdapter()).notifyDataSetChanged(); //atualiza gridview
+                    if (board.getToPlay().getID() == 1) {
+                        txtPlayer1.setBackgroundColor(Color.rgb(99, 00, 00));
+                        txtPlayer2.setBackgroundColor(Color.rgb(24, 14, 00));
+                    } else {
+                        txtPlayer2.setBackgroundColor(Color.rgb(99, 00, 00));
+                        txtPlayer1.setBackgroundColor(Color.rgb(24, 14, 00));
+                    }
+                    //boardGame.setAdapter(new GridViewAdapterSingle(getApplicationContext(), board)); //atualiza gridview
+                    //Toast.makeText(SinglePlayerActivity.this, "X: " + s.getX() + "\tY: " + s.getY(), Toast.LENGTH_SHORT).show();
 
-        boardGame.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                board.verifyMove(position);
-                board.changePlayer(player1, player2);
-                ((GridViewAdapterSingle) boardGame.getAdapter()).notifyDataSetChanged(); //atualiza gridview
-                if(board.getToPlay().getID() == 1){
-                    txtPlayer1.setBackgroundColor(Color.rgb(99,00, 00));
-                    txtPlayer2.setBackgroundColor(Color.rgb(24,14, 00));
-                }else{
-                    txtPlayer2.setBackgroundColor(Color.rgb(99,00, 00));
-                    txtPlayer1.setBackgroundColor(Color.rgb(24,14, 00));
                 }
-                //boardGame.setAdapter(new GridViewAdapterSingle(getApplicationContext(), board)); //atualiza gridview
-                //Toast.makeText(SinglePlayerActivity.this, "X: " + s.getX() + "\tY: " + s.getY(), Toast.LENGTH_SHORT).show();
+            });
+        }
+    }
 
-            }
-        });
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putSerializable("jog1", player1);
+        savedInstanceState.putSerializable("jog2", player2);
+        savedInstanceState.putSerializable("dados", board);
+    }
 
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        // Restore UI state from the savedInstanceState.
+        // This bundle has also been passed to onCreate.
+        player1 = (Player) savedInstanceState.getSerializable("jog1");
+        player2 = (Player) savedInstanceState.getSerializable("jog2");
+        board = (Board) savedInstanceState.getSerializable("dados");
     }
 
     private class GridViewAdapterSingle extends BaseAdapter {
