@@ -1,14 +1,17 @@
 package pt.isec.tp.amov;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,7 +27,7 @@ import static pt.isec.tp.amov.Constants.CRITICAL_MOVE;
  */
 
 public class SinglePlayerActivity extends AppCompatActivity{
-    GridView boardGame;
+    GridView boardGame, eatenPieces;
     Board board;
     Player player1, player2;
     TextView txtPlayer1, txtPlayer2;
@@ -102,6 +105,50 @@ public class SinglePlayerActivity extends AppCompatActivity{
         player1 = (Player) savedInstanceState.getSerializable("jog1");
         player2 = (Player) savedInstanceState.getSerializable("jog2");
         board = (Board) savedInstanceState.getSerializable("dados");
+    }
+
+    public void onEatenPieces(View v){
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(SinglePlayerActivity.this);
+        View mView = getLayoutInflater().inflate(R.layout.activity_eatenpieces, null);
+        int p1 = R.id.txtPlayer1;
+        int p2 = R.id.txtPlayer2;
+        eatenPieces = mView.findViewById(R.id.grdvEatenPieces);
+        TextView txt = (TextView) v;
+        if(txt.getId() == p1){
+            eatenPieces.setAdapter(new GridViewAdapterEatenPieces(this, player1));
+        }
+        if(txt.getId() == p2){
+            eatenPieces.setAdapter(new GridViewAdapterEatenPieces(this, player2));
+        }
+        mBuilder.setView(mView);
+        AlertDialog dialog = mBuilder.create();
+        dialog.show();
+    }
+
+    private class GridViewAdapterEatenPieces extends BaseAdapter {
+        Context mContext;
+        Player id;
+
+        private GridViewAdapterEatenPieces(Context c, Player p) { mContext = c; id = p; }
+
+        @Override
+        public int getCount() { return id.getEatenPieces().size(); }
+
+        @Override
+        public Object getItem(int i) { return null; }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(final int position, final View convertView, final ViewGroup parent) {
+            ImageView img = new ImageView(mContext);
+            img.setImageDrawable(getDrawable(id.getEatenPieces().get(position).getType()));
+            img.setAdjustViewBounds(true);
+            return img;
+        }
     }
 
     private class GridViewAdapterSingle extends BaseAdapter {

@@ -18,6 +18,7 @@
         <activity android:name=".SinglePlayerActivity"/>
         <activity android:name=".LanguageOptionActivity"/>
         <activity android:name=".MultiPlayerMenuActivity"/>
+        <activity android:name=".EatenPiecesActivity"/>
     </application>
 
 </manifest>

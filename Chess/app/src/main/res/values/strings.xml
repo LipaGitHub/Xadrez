@@ -3,4 +3,5 @@
     <string name="txtSinglePlayer">SINGLE PLAYER</string>
     <string name="txtChooseLanguage">Choose your language</string>
     <string name="txtMultiPlayer">MULTI PLAYER</string>
+    <string name="txtEatenPieces">Conquered pieces</string>
 </resources>

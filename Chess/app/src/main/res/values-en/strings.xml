@@ -4,4 +4,5 @@
     <string name="app_name">CHESS</string>
     <string name="txtChooseLanguage">Choose your language</string>
     <string name="txtMultiPlayer">MULTI PLAYER</string>
+    <string name="txtEatenPieces">Conquered pieces</string>
 </resources>

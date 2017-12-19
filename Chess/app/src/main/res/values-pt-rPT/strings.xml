@@ -4,4 +4,5 @@
     <string name="app_name">XADREZ</string>
     <string name="txtChooseLanguage">Escolha a sua lingua</string>
     <string name="txtMultiPlayer">MODO MULTIJOGADOR</string>
+    <string name="txtEatenPieces">Peças conquistadas</string>
 </resources>
