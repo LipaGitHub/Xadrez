@@ -17,6 +17,8 @@ import java.io.Serializable;
 import pt.isec.tp.amov.Game.Board;
 import pt.isec.tp.amov.Game.Player;
 
+import static pt.isec.tp.amov.Constants.CRITICAL_MOVE;
+
 /**
  * Created by Fajardo on 12/12/2017.
  */
@@ -47,7 +49,7 @@ public class SinglePlayerActivity extends AppCompatActivity{
             player1 = new Player(1);
             player2 = new Player(2, "PC");
             //TODO: podemos ainda randomizar para ver quem comeca o jogo p.ex.
-            board = new Board(player1);
+            board = new Board(player1, player2);
 
             player1.initializePieces();
             player2.initializePieces();
@@ -126,10 +128,10 @@ public class SinglePlayerActivity extends AppCompatActivity{
             if(mBoard.getTiles().get(position).isOccupied() == false)
                 img.setImageResource(mBoard.getTiles().get(position).getColor());
             else {
-                //img.setImageResource(mBoard.getTiles().get(position).getPiece().getType());
-                //img.setBackgroundColor(mBoard.getTiles().get(position).getColor());
-                //img.setBackgroundColor(mBoard.getTiles().get(position).getColor());
-                img.setImageDrawable(getDrawable(mBoard.getTiles().get(position).getPiece().getType()));
+                if(mBoard.getTiles().get(position).getColor() == CRITICAL_MOVE)
+                    img.setImageResource(mBoard.getTiles().get(position).getColor());
+                else
+                    img.setImageDrawable(getDrawable(mBoard.getTiles().get(position).getPiece().getType()));
             }
             img.setAdjustViewBounds(true);
             return img;

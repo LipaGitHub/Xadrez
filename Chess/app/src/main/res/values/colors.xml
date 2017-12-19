@@ -6,5 +6,5 @@
     <color name="colorBrownSquare">#da8f43</color>
     <color name="colorCreamSquare">#f3eac3</color>
     <color name="colorPossibleMove">#e1e147</color>
-    <color name="colorAttack">#FF0000</color>
+    <color name="colorAttack">#cc1515</color>
 </resources>

@@ -9,8 +9,10 @@ public interface Constants {
     int BROWN_TILE = R.drawable.brown_square;
     int CREAM_TILE = R.drawable.cream_square;
     int POSSIBLE_MOVE = R.drawable.possible_move;
+    int CRITICAL_MOVE = R.drawable.critical_move;
 
     int ERRO = 404;
+    int MOVE = 111;
     int ATTACK = 666;
 
     int KING_1 = R.drawable.brown_k;

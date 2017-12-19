@@ -23,14 +23,14 @@ public class Player implements Serializable{
     private Piece toMove;                 //peça a ser movida
     private int mode;   //0: REST; 1: MOVE; 2: ATTACK
     private ArrayList<Piece> pieces;
-    private ArrayList<Integer> possibilidadesMover;
+    private ArrayList<Piece> eatenPieces;
 
     public Player(int id){
         this.ID = id;
         this.firstMove = true;
         this.mode = 0;
         this.pieces = new ArrayList<>();
-        this.possibilidadesMover = new ArrayList<>();
+        this.eatenPieces = new ArrayList<>();
     }
 
     public Player(int id, String nome) {
@@ -39,7 +39,7 @@ public class Player implements Serializable{
         this.firstMove = true;
         this.mode = 0;
         this.pieces = new ArrayList<>();
-        this.possibilidadesMover = new ArrayList<>();
+        this.eatenPieces = new ArrayList<>();
     }
 
     public int getID() { return ID; }
@@ -74,17 +74,9 @@ public class Player implements Serializable{
     public ArrayList<Piece> getPieces() { return pieces; }
     public void setPieces(ArrayList<Piece> pieces) { this.pieces = pieces; }
 
-    public ArrayList<Integer> getPossibilidadesMover() {
-        return possibilidadesMover;
-    }
-
-    public void setPossibilidadesMover(ArrayList<Integer> possibilidadesMover) {
-        this.possibilidadesMover = possibilidadesMover;
-    }
-
-    public void guardaPossibilidades(int[] p){
-        for(int i=0; i < p.length;i++)
-            this.possibilidadesMover.add(p[i]);
+    public ArrayList<Piece> getEatenPieces() { return eatenPieces; }
+    public void setEatenPieces(ArrayList<Piece> eatenPieces) {
+        this.eatenPieces = eatenPieces;
     }
 
     public void initializePieces() {
