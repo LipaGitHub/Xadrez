@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.util.Locale;
 
@@ -48,12 +49,18 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void onSinglePlayer(View v){
-        Intent i = new Intent(getApplicationContext(), SinglePlayerActivity.class);
+    public void onAgainstPC(View v){
+
+        Intent i = new Intent(getApplicationContext(), AgainstPcActivity.class);
         startActivity(i);
     }
 
-    public void onMultiPlayer(View v){
+    /*public void onSinglePlayer(View v){
+        Intent i = new Intent(getApplicationContext(), SinglePlayerActivity.class);
+        startActivity(i);
+    }*/
+
+    public void onMultiPlayerMenu(View v){
         Intent i = new Intent(getApplicationContext(), MultiPlayerMenuActivity.class);
         startActivity(i);
     }

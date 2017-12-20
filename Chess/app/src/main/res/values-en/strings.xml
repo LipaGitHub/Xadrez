@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="txtSinglePlayer">SINGLE PLAYER</string>
-    <string name="app_name">CHESS</string>
     <string name="txtChooseLanguage">Choose your language</string>
     <string name="txtMultiPlayer">MULTI PLAYER</string>
     <string name="txtEatenPieces">Conquered pieces</string>
+    <string name="lblPlayer2">PLAYER 2</string>
+    <string name="lblPlayer1">PLAYER 1</string>
+    <string name="txtTitulo">CHESS</string>
+    <string name="txtSaveCurrentGame">Save current game ?</string>
 </resources>

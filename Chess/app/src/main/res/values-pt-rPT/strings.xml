@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="txtSinglePlayer">MODO SIMPLES</string>
-    <string name="app_name">XADREZ</string>
     <string name="txtChooseLanguage">Escolha a sua lingua</string>
     <string name="txtMultiPlayer">MODO MULTIJOGADOR</string>
     <string name="txtEatenPieces">Peças conquistadas</string>
+    <string name="lblPlayer2">PLAYER 2</string>
+    <string name="lblPlayer1">PLAYER 1</string>
+    <string name="txtTitulo">XADREZ</string>
+    <string name="txtSaveCurrentGame">Guardar jogo ?</string>
 </resources>

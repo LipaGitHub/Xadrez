@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="txtSinglePlayer">MODE SIMPLE</string>
-    <string name="app_name">ECHECS</string>
     <string name="txtChooseLanguage">Choisissez une langue</string>
     <string name="txtMultiPlayer">MODE AVANCE</string>
     <string name="txtEatenPieces">Pièces conquises</string>
+    <string name="lblPlayer2">PLAYER 2</string>
+    <string name="lblPlayer1">PLAYER 1</string>
+    <string name="txtTitulo">ECHEC</string>
+    <string name="txtSaveCurrentGame">Sauvegarder la partie ?</string>
 </resources>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/grdvBoard"
+        app:layout_constraintEnd_toEndOf="@+id/grdvBoard"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/grdvBoard"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/user"
+            android:contentDescription="Player 2 image" />
+
+        <TextView
+            android:id="@+id/txtPlayer2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:clickable="true"
+            android:drawableEnd="@android:drawable/ic_menu_help"
+            android:onClick="onEatenPieces"
+            android:fontFamily="@font/rythmus_regular"
+            android:gravity="start"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:text="@string/lblPlayer2"
+            android:textColor="#FFFFFF"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:background="@drawable/rounded_border"/>
+
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/grdvBoard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/board_brown"
+        android:cacheColorHint="@android:color/transparent"
+        android:foreground="@android:color/transparent"
+        android:foregroundTint="@android:color/transparent"
+        android:numColumns="8"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/grdvBoard">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/user"
+            android:contentDescription="Player 1 image" />
+
+        <TextView
+            android:id="@+id/txtPlayer1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:clickable="true"
+            android:drawableEnd="@android:drawable/ic_menu_help"
+            android:onClick="onEatenPieces"
+            android:fontFamily="@font/rythmus_regular"
+            android:gravity="start"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:text="@string/lblPlayer1"
+            android:textColor="#FFFFFF"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:background="@drawable/rounded_border"/>
+
+        <!--<ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:drawable/ic_menu_help"/>-->
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

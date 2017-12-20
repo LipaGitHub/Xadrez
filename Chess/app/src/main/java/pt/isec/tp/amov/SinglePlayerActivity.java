@@ -35,7 +35,7 @@ public class SinglePlayerActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_singleplayer);
+        setContentView(R.layout.activity_game_container);
 
         if(savedInstanceState != null
                 && (savedInstanceState.getSerializable("dados") != null)){
@@ -172,7 +172,7 @@ public class SinglePlayerActivity extends AppCompatActivity{
         public View getView(final int position, final View convertView, final ViewGroup parent) {
             ImageView img = new ImageView(mContext);
 
-            if(mBoard.getTiles().get(position).isOccupied() == false)
+            if(!mBoard.getTiles().get(position).isOccupied())
                 img.setImageResource(mBoard.getTiles().get(position).getColor());
             else {
                 if(mBoard.getTiles().get(position).getColor() == CRITICAL_MOVE)
