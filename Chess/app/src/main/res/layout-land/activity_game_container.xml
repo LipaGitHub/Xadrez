@@ -6,22 +6,97 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="252dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/grdvBoard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/user"
+            android:contentDescription="Player 2 image" />
+
+        <TextView
+            android:id="@+id/txtPlayer2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:background="@drawable/rounded_border"
+            android:clickable="true"
+            android:drawableEnd="@android:drawable/ic_menu_help"
+            android:fontFamily="@font/rythmus_regular"
+            android:gravity="start"
+            android:onClick="onEatenPieces"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:text="@string/lblPlayer2"
+            android:textColor="#FFFFFF"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="253dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/grdvBoard"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/user"
+            android:contentDescription="Player 1 image" />
+
+        <TextView
+            android:id="@+id/txtPlayer1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:background="@drawable/rounded_border"
+            android:clickable="true"
+            android:drawableEnd="@android:drawable/ic_menu_help"
+            android:fontFamily="@font/rythmus_regular"
+            android:gravity="start"
+            android:onClick="onEatenPieces"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:text="@string/lblPlayer1"
+            android:textColor="#FFFFFF"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
     <GridView
         android:id="@+id/grdvBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/board_brown"
+        android:background="@drawable/board_brown_rot"
         android:cacheColorHint="@android:color/transparent"
         android:foreground="@android:color/transparent"
         android:foregroundTint="@android:color/transparent"
         android:numColumns="8"
+        android:rotation="90"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.494" />
 

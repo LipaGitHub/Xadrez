@@ -8,4 +8,5 @@
     <string name="lblPlayer1">PLAYER 1</string>
     <string name="txtTitulo">XADREZ</string>
     <string name="txtSaveCurrentGame">Guardar jogo ?</string>
+    <string name="preferences">Preferências</string>
 </resources>

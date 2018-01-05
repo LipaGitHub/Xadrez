@@ -8,4 +8,5 @@
     <string name="lblPlayer1">PLAYER 1</string>
     <string name="txtTitulo">CHESS</string>
     <string name="txtSaveCurrentGame">Save current game ?</string>
+    <string name="preferences">Preferences</string>
 </resources>

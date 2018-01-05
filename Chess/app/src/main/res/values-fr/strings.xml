@@ -8,4 +8,5 @@
     <string name="lblPlayer1">PLAYER 1</string>
     <string name="txtTitulo">ECHEC</string>
     <string name="txtSaveCurrentGame">Sauvegarder la partie ?</string>
+    <string name="preferences">Préférences</string>
 </resources>

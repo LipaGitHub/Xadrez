@@ -24,6 +24,7 @@ public class Player implements Serializable{
     private int mode;   //0: REST; 1: MOVE; 2: ATTACK
     private ArrayList<Piece> pieces;
     private ArrayList<Piece> eatenPieces;
+    private Thread timer;
 
     public Player(int id){
         this.ID = id;
@@ -78,6 +79,8 @@ public class Player implements Serializable{
     public void setEatenPieces(ArrayList<Piece> eatenPieces) {
         this.eatenPieces = eatenPieces;
     }
+    public Thread getTimer() { return timer; }
+    public void setTimer(Thread timer) { this.timer = timer; }
 
     public void initializePieces() {
         if (ID == 1) {
@@ -93,9 +96,6 @@ public class Player implements Serializable{
             this.pieces.add(new Knight(Constants.KNIGHT_1, 7, 6));
             this.pieces.add(new Rook(Constants.ROOK_1, 7, 7));
         }else{
-            for (int i = 0; i < 8; i++) {
-                this.pieces.add(new Pawn(Constants.PAWN_2, 1, i));
-            }
             this.pieces.add(new Rook(Constants.ROOK_2, 0, 0));
             this.pieces.add(new Knight(Constants.KNIGHT_2, 0, 1));
             this.pieces.add(new Bishop(Constants.BISHOP_2, 0, 2));
@@ -104,6 +104,9 @@ public class Player implements Serializable{
             this.pieces.add(new Bishop(Constants.BISHOP_2, 0, 5));
             this.pieces.add(new Knight(Constants.KNIGHT_2, 0, 6));
             this.pieces.add(new Rook(Constants.ROOK_2, 0, 7));
+            for (int i = 0; i < 8; i++) {
+                this.pieces.add(new Pawn(Constants.PAWN_2, 1, i));
+            }
         }
     }
 }

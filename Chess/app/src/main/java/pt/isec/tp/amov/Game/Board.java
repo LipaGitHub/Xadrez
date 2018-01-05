@@ -30,65 +30,47 @@ import static pt.isec.tp.amov.Constants.ROOK_2;
 
 public class Board implements Serializable {
 
-    Squares[][] board;
+    static int contador = 0;
+    private int ID;
+    private String name;
+    //Squares[][] board;
     private ArrayList<Squares> tiles;
     private Player player1, player2;
     private Player toPlay;
+    private int timer;
+    private int winner;
 
     public Board(Player p1, Player p2) {
-        this.board = new Squares[8][8];
+        this.ID = contador++;
+        this.name = "Game #" + contador;
         this.player1 = p1;
         this.player2 = p2;
         this.toPlay = p1;
         this.tiles = new ArrayList<>();
     }
 
-
-    public Squares[][] getBoard() {
-        return board;
-    }
-
-    public void setBoard(Squares[][] board) {
-        this.board = board;
-    }
-
-    public Player getPlayer1() {
-        return player1;
-    }
-
-    public void setPlayer1(Player player1) {
-        this.player1 = player1;
-    }
-
-    public Player getPlayer2() {
-        return player2;
-    }
-
-    public void setPlayer2(Player player2) {
-        this.player2 = player2;
-    }
-
-    public Player getToPlay() {
-        return toPlay;
-    }
-
-    public void setToPlay(Player toPlay) {
-        this.toPlay = toPlay;
-    }
-
-    public ArrayList<Squares> getTiles() {
-        return tiles;
-    }
-
-    public void setTiles(ArrayList<Squares> tiles) {
-        this.tiles = tiles;
-    }
+    public int getID() { return ID; }
+    public void setID(int ID) { this.ID = ID; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public Player getPlayer1() { return player1; }
+    public void setPlayer1(Player player1) { this.player1 = player1; }
+    public Player getPlayer2() { return player2; }
+    public void setPlayer2(Player player2) { this.player2 = player2; }
+    public Player getToPlay() { return toPlay; }
+    public void setToPlay(Player toPlay) { this.toPlay = toPlay; }
+    public ArrayList<Squares> getTiles() { return tiles; }
+    public void setTiles(ArrayList<Squares> tiles) { this.tiles = tiles; }
+    public int getTimer() { return timer; }
+    public void setTimer(int timer) { this.timer = timer; }
+    public int getWinner() { return winner; }
+    public void setWinner(int winner) { this.winner = winner; }
 
     public void createBoard() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                Squares s = new Squares(i, j);
-                board[i][j] = s;
+                int id = i*8+j;
+                Squares s = new Squares(id, i, j);
                 tiles.add(s);
             }
         }
@@ -137,14 +119,14 @@ public class Board implements Serializable {
     public void showPiecesOnBoard(Player p1, Player p2) {
         //JOGADOR 1
         for (int i = 0; i < p1.getPieces().size(); i++) {
-            board[p1.getPieces().get(i).getX()][p1.getPieces().get(i).getY()].setOccupied(true);
-            board[p1.getPieces().get(i).getX()][p1.getPieces().get(i).getY()].setPiece(p1.getPieces().get(i));
+            this.getTiles().get(48+i).setOccupied(true);
+            this.getTiles().get(48+i).setPiece(p1.getPieces().get(i));
         }
 
         //JOGADOR 2
         for (int i = 0; i < p2.getPieces().size(); i++) {
-            board[p2.getPieces().get(i).getX()][p2.getPieces().get(i).getY()].setOccupied(true);
-            board[p2.getPieces().get(i).getX()][p2.getPieces().get(i).getY()].setPiece(p2.getPieces().get(i));
+            this.getTiles().get(i).setOccupied(true);
+            this.getTiles().get(i).setPiece(p2.getPieces().get(i));
         }
     }
 
@@ -205,28 +187,6 @@ public class Board implements Serializable {
 
             if (res == ATTACK) {
                 p.setFirstMove(false);
-                //atualiza/remove peça que foi comida do inimigo
-                /*if (p.getID() == 1) {
-                    for(int j=0; j < p.getEatenPieces().size(); j++) {
-                        for (int i = 0; i < player2.getPieces().size(); i++) {
-                            if (player2.getPieces().get(i).getX() == p.getEatenPieces().get(j).getX() &&
-                                    player2.getEatenPieces().get(i).getY() == p.getEatenPieces().get(j).getY()) {
-                                player2.getPieces().remove(i);
-                                break;
-                            }
-                        }
-                    }
-                } else {
-                    for(int j=0; j < p.getEatenPieces().size(); j++) {
-                        for (int i = 0; i < player1.getPieces().size(); i++) {
-                            if (player1.getPieces().get(i).getX() == p.getEatenPieces().get(j).getX() &&
-                                    player1.getEatenPieces().get(i).getY() == p.getEatenPieces().get(j).getY()) {
-                                player1.getPieces().remove(i);
-                                break;
-                            }
-                        }
-                    }
-                }*/
             }
             if(res == MOVE || res == ATTACK){
                 //REMOVE A PECA DO SITIO ONDE ESTAVA (ANTES DE ATACAR)
@@ -263,7 +223,8 @@ public class Board implements Serializable {
     }
 
     public void changePlayer(Player p1, Player p2) {
-        if (getToPlay().equals(p1)) {
+        //if (getToPlay().equals(p1)) {
+        if (getToPlay().getID() == p1.getID()) {
             if (this.getToPlay().getMode() == 2) {
                 this.setToPlay(p2);
             } else {
@@ -280,10 +241,12 @@ public class Board implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this.getToPlay() == obj) {
-            return true;
+        if (this.getToPlay().getClass() != obj.getClass()) {
+            return false;
         }
-        return false;
+
+        final Board other = (Board) obj;
+        return this.getName().equals(other.getName());
     }
 
     public void paintPossibleMoves(Piece p) {
@@ -294,5 +257,22 @@ public class Board implements Serializable {
         for (int i = 0; i < p.getCriticalMoves().size(); i++) {
             this.getTiles().get(p.getCriticalMoves().get(i)).setColor(CRITICAL_MOVE);
         }
+    }
+
+    public boolean kingdefeated(){
+        for(int i=0; i < this.getPlayer1().getEatenPieces().size(); i++){
+            if(this.getPlayer1().getEatenPieces().get(i).getType() == KING_2){
+                this.setWinner(this.getPlayer1().getID());
+                return true;
+            }
+        }
+
+        for(int i=0; i < this.getPlayer2().getEatenPieces().size(); i++){
+            if(this.getPlayer1().getEatenPieces().get(i).getType() == KING_1){
+                this.setWinner(this.getPlayer2().getID());
+                return true;
+            }
+        }
+        return false;
     }
 }

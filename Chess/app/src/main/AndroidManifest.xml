@@ -16,11 +16,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SinglePlayerActivity" />
-        <activity android:name=".AgainstPcActivity"/>
-        <activity android:name=".LanguageOptionActivity" />
-        <activity android:name=".MultiPlayerMenuActivity" />
-        <activity android:name=".EatenPiecesActivity" />
+        <activity android:name=".SinglePlayerActivity"
+            android:label="You versus Enemy"/>
+        <activity android:name=".AgainstPcActivity"
+            android:label="You versus PC"/>
+        <activity android:name=".LanguageOptionActivity"/>
+        <activity android:name=".MultiPlayerMenuActivity"
+            android:label="You versus Enemy (Network)"/>
+        <activity android:name=".EatenPiecesActivity"/>
+        <activity android:name=".ExistingGames"
+            android:label="Saved games"/>
+            <!--android:theme="@style/Base.Theme.AppCompat.Light.Dialog.Alert"-->
     </application>
 
 </manifest>

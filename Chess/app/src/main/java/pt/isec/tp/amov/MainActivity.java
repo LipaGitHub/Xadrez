@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         config.locale = locale;
         getResources().updateConfiguration(config, getResources().getDisplayMetrics());
         setContentView(R.layout.activity_main);
-
     }
 
     @Override
@@ -50,15 +49,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onAgainstPC(View v){
-
-        Intent i = new Intent(getApplicationContext(), AgainstPcActivity.class);
+        Intent i = new Intent(getApplicationContext(), ExistingGames.class);
         startActivity(i);
     }
-
-    /*public void onSinglePlayer(View v){
-        Intent i = new Intent(getApplicationContext(), SinglePlayerActivity.class);
-        startActivity(i);
-    }*/
 
     public void onMultiPlayerMenu(View v){
         Intent i = new Intent(getApplicationContext(), MultiPlayerMenuActivity.class);
