@@ -46,8 +46,9 @@ public class ExistingGames extends AppCompatActivity {
         games = readData(fileName);
         if(games.size() == 0){
             Intent i = new Intent(this, AgainstPcActivity.class);
+            i.putExtra("PROFILECHOSEN", (Profile) getIntent().getExtras().get("PROFILECHOSEN"));
             i.putExtra("newGame", 100);
-            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            //i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
             finish();
         }else {

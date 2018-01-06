@@ -63,18 +63,21 @@ public class AgainstPcActivity extends AppCompatActivity{
         boardGame = findViewById(R.id.grdvBoard);
         boardGame.setNumColumns(8);
         games = new ArrayList<>();
+        Profile pro;
 
         Bundle extras = getIntent().getExtras();
         if(extras != null){
+            pro = (Profile) extras.get("PROFILECHOSEN");
             board = (Board) extras.get("changeMode"); //em caso de ter alterado de 1vs1 (1 dispositivo) p/ 1 vs PC
             if(board != null) {
                 reCreateGame(board); //recria jogo
             }else if((extras.getInt("newGame")) == 100){ //primeiro jogo ever
-                newGame();
-            }else{ //jogar jogo existente
+                newGame(pro);
+            }else{//jogar jogo existente
                 Bundle args =  extras.getBundle("EXISTING_BOARD");
                 board = (Board) args.getSerializable("BOARD");
                 if(board != null){
+                    board.getPlayer1().setNome(pro.getName());
                     reCreateGame(board);
                 }
             }
@@ -226,8 +229,8 @@ public class AgainstPcActivity extends AppCompatActivity{
         }
     }
 
-    public void newGame(){
-        createGame();
+    public void newGame(Profile pro){
+        createGame(pro);
         boardGame.setAdapter(new AgainstPcActivity.GridViewAdapterSingle(this, board));
         boardGame.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -272,8 +275,8 @@ public class AgainstPcActivity extends AppCompatActivity{
         });
     }
 
-    public void createGame(){
-        player1 = new Player(1, "Dany");
+    public void createGame(Profile pro){
+        player1 = new Player(1, pro.getName());
         player2 = new Player(2, "PC");
         //TODO: podemos ainda randomizar para ver quem comeca o jogo p.ex.
         board = new Board(player1, player2);

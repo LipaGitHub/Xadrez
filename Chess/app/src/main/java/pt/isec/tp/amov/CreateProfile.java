@@ -67,6 +67,7 @@ public class CreateProfile extends AppCompatActivity{
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             imageBitmap = (Bitmap) extras.get("data");
+            imgViewPicture.setBackground(null);
             imgViewPicture.setImageBitmap(imageBitmap);
         }
     }

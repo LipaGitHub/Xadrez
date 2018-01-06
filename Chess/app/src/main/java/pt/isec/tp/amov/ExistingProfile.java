@@ -4,6 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -243,7 +248,13 @@ public class ExistingProfile extends AppCompatActivity {
             Bitmap bitmap;
             byte [] encodeByte= Base64.decode(expandedListText.getImg(), Base64.DEFAULT);
             bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            imageView.setImageBitmap(bitmap);
+            Bitmap imageRounded = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());
+            Canvas canvas = new Canvas(imageRounded);
+            Paint mpaint = new Paint();
+            mpaint.setAntiAlias(true);
+            mpaint.setShader(new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
+            canvas.drawRoundRect((new RectF(0, 0, bitmap.getWidth(), bitmap.getHeight())), 100, 100, mpaint);// Round Image Corner 100 100 100 100
+            imageView.setImageBitmap(imageRounded);
 
             TextView expandedListTextView = (TextView) convertView
                     .findViewById(R.id.expandedListItem);

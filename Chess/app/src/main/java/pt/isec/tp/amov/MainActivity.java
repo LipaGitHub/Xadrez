@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String FILE_NAME = "file_lang"; // preference file name
     private static final String KEY_LANG = "key_lang"; // preference key
 
+    Profile p;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         TextView txtActualProfile = findViewById(R.id.txtActualProfile);
 
-        Profile p;
         if((p = (Profile) getIntent().getSerializableExtra("THISPROFILE")) != null){
             txtActualProfile.setText("Profile: " + p.getName());
         }
@@ -58,8 +59,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onAgainstPC(View v){
-        Intent i = new Intent(getApplicationContext(), ExistingGames.class);
-        startActivity(i);
+        if(p != null) {
+            Intent i = new Intent(getApplicationContext(), ExistingGames.class);
+            i.putExtra("PROFILECHOSEN", p);
+            startActivity(i);
+        }else{
+            Intent i = new Intent(getApplicationContext(), ExistingProfile.class);
+            startActivity(i);
+        }
     }
 
     public void onMultiPlayerMenu(View v){
