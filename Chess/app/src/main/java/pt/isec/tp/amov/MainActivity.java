@@ -30,6 +30,12 @@ public class MainActivity extends AppCompatActivity {
         config.locale = locale;
         getResources().updateConfiguration(config, getResources().getDisplayMetrics());
         setContentView(R.layout.activity_main);
+        TextView txtActualProfile = findViewById(R.id.txtActualProfile);
+
+        Profile p;
+        if((p = (Profile) getIntent().getSerializableExtra("THISPROFILE")) != null){
+            txtActualProfile.setText("Profile: " + p.getName());
+        }
     }
 
     @Override
@@ -43,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.action_language:
                 onLanguageOption(findViewById(R.id.action_language));
+                break;
+            case R.id.action_profile:
+                onExistingProfile(findViewById(R.id.action_profile));
                 break;
         }
         return true;
@@ -87,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
         //Intent i = new Intent(getApplicationContext(), LanguageOptionActivity.class);
         //startActivity(i);
+    }
+
+    public void onExistingProfile(View v){
+        Intent i = new Intent(getApplicationContext(), ExistingProfile.class);
+        startActivity(i);
     }
 
     private void saveLanguage(String lang) {

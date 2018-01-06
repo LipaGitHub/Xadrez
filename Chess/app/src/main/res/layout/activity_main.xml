@@ -18,9 +18,9 @@
         android:text="@string/txtTitulo"
         android:textColor="@color/colorBrownSquare"
         android:textSize="80sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnSinglePlayer"
         app:layout_constraintEnd_toEndOf="@+id/btnSinglePlayer"
-        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/btnSinglePlayer"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.09" />
@@ -34,13 +34,14 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:drawableEnd="@mipmap/ic_user"
         android:fontFamily="@font/rythmus_regular"
         android:onClick="onAgainstPC"
         android:text="@string/txtSinglePlayer"
         android:textSize="32sp"
-        android:drawableEnd="@mipmap/ic_user"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnMultiPlayer"
         app:layout_constraintEnd_toEndOf="@+id/btnMultiPlayer"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/btnMultiPlayer"
         app:layout_constraintTop_toBottomOf="@+id/txtTitle"
         app:layout_constraintVertical_bias="0.063" />
@@ -53,16 +54,27 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:drawableEnd="@mipmap/ic_users"
         android:fontFamily="@font/rythmus_regular"
         android:onClick="onMultiPlayerMenu"
         android:text="@string/txtMultiPlayer"
-        android:drawableEnd="@mipmap/ic_users"
         android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtActualProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSinglePlayer"
+        app:layout_constraintVertical_bias="0.66" />
+
+    <TextView
+        android:id="@+id/txtActualProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.66" />
+        app:layout_constraintTop_toBottomOf="@+id/btnMultiPlayer" />
 
 </android.support.constraint.ConstraintLayout>

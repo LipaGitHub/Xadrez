@@ -8,4 +8,11 @@
         android:icon="@android:drawable/ic_menu_mapmode"
         app:showAsAction="always"
         />
+    <item
+        android:id="@+id/action_profile"
+        android:orderInCategory="90"
+        android:title="Profile"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        app:showAsAction="always"
+        />
 </menu>
