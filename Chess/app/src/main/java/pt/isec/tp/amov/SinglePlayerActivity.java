@@ -262,7 +262,7 @@ public class SinglePlayerActivity extends AppCompatActivity{
 
     public void createGame(int time, Profile pro) {
         player1 = new Player(1, pro);
-        player2 = new Player(2, new Profile("PC", "por_inserir"));
+        player2 = new Player(2, new Profile("PC", ""));
         //TODO: podemos ainda randomizar para ver quem comeca o jogo p.ex.
         board = new Board(player1, player2);
         board.setTimer(time);

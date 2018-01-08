@@ -308,10 +308,6 @@ public class AgainstPcActivity extends AppCompatActivity{
         byte [] encodeByte= Base64.decode(player1.getProfile().getImg(), Base64.DEFAULT);
         bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
         imgViewProfile1.setImageBitmap(bitmap);
-
-        //encodeByte= Base64.decode(player2.getProfile().getImg(), Base64.DEFAULT);
-        //bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-        //imgViewProfile2.setImageBitmap(bitmap);
     }
 
     public void reCreateGame(Board b){
@@ -319,6 +315,10 @@ public class AgainstPcActivity extends AppCompatActivity{
         player2 = b.getPlayer2();
         txtPlayer1.setText(b.getPlayer1().getProfile().getName());
         txtPlayer2.setText(b.getPlayer2().getProfile().getName());
+        Bitmap bitmap;
+        byte [] encodeByte= Base64.decode(player1.getProfile().getImg(), Base64.DEFAULT);
+        bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+        imgViewProfile1.setImageBitmap(bitmap);
         boardGame.setAdapter(new AgainstPcActivity.GridViewAdapterSingle(this, b));
 
         boardGame.setOnItemClickListener(new AdapterView.OnItemClickListener() {

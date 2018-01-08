@@ -19,6 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/imgViewProfile2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -59,11 +60,10 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
+            android:id="@+id/imgViewProfile1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/user"
-            android:contentDescription="Player 1 image" />
+            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/txtPlayer1"
