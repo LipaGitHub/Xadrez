@@ -23,6 +23,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,6 +60,8 @@ public class ExistingProfile extends AppCompatActivity {
         existingProfiles = new ArrayList<>();
         HashMap<String, Profile> expandableProfile = new HashMap<>();
 
+        Toast.makeText(this, R.string.toast_profiel, Toast.LENGTH_LONG).show();
+
         //ler do ficheiro
         existingProfiles = readData(fileName);
         if(existingProfiles.size() > 0) {
@@ -81,7 +84,7 @@ public class ExistingProfile extends AppCompatActivity {
                 }
             });
 
-            expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+            /*expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
 
                 @Override
                 public void onGroupCollapse(int groupPosition) {
@@ -104,7 +107,7 @@ public class ExistingProfile extends AppCompatActivity {
                                     expandableListTitle.get(groupPosition)), Toast.LENGTH_SHORT).show();
                     return false;
                 }
-            });
+            });*/
         }else {
             //caso contrario, cria novo perfil
             Intent i = new Intent(this, CreateProfile.class);
@@ -138,7 +141,7 @@ public class ExistingProfile extends AppCompatActivity {
                 Bundle args = data.getExtras();
                 if((aux = args.get("PROFILE")) != null){
                     existingProfiles.add((Profile) aux);
-                    writeData(fileName, data);
+                    writeData(fileName);
                     finish();
                     startActivity(getIntent()); //faz com que "atualize" ou seja faz reload da activity
                 }
@@ -177,7 +180,7 @@ public class ExistingProfile extends AppCompatActivity {
         return existingProfiles;
     }
 
-    public void writeData(String fileName, Intent data){
+    public void writeData(String fileName){
         File file = new File(getApplicationContext().getFilesDir(), fileName);
 
         try {
@@ -211,6 +214,18 @@ public class ExistingProfile extends AppCompatActivity {
         }
     }
 
+    public void overrideExistingGamesFile(String f){
+        deleteFile(f);
+        File file = new File(getApplicationContext().getFilesDir(), f);
+        try {
+            if(file.createNewFile()){
+                Log.i("1", "Ficheiro criado!");// if file already exists will do nothing
+            }else Log.i("2", "sqn");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public class CustomExpandableList extends BaseExpandableListAdapter {
         private Context context;
         private List<String> expandableListTitle;
@@ -235,7 +250,7 @@ public class ExistingProfile extends AppCompatActivity {
         }
 
         @Override
-        public View getChildView(int listPosition, final int expandedListPosition,
+        public View getChildView(final int listPosition, final int expandedListPosition,
                                  boolean isLastChild, View convertView, ViewGroup parent) {
             final Profile expandedListText = (Profile) getChild(listPosition, expandedListPosition);
             if (convertView == null) {
@@ -256,21 +271,37 @@ public class ExistingProfile extends AppCompatActivity {
             canvas.drawRoundRect((new RectF(0, 0, bitmap.getWidth(), bitmap.getHeight())), 100, 100, mpaint);// Round Image Corner 100 100 100 100
             imageView.setImageBitmap(imageRounded);
 
-            TextView expandedListTextView = (TextView) convertView
-                    .findViewById(R.id.expandedListItem);
-            expandedListTextView.setText("Nome: " + expandedListText.getName());
+            TextView expandedListTextView = convertView.findViewById(R.id.expandedListItem);
+            expandedListTextView.setText(getString(R.string.nome_li) + expandedListText.getName());
 
-            TextView expandedListTextView1 = (TextView) convertView
-                    .findViewById(R.id.expandedListItem1);
-            expandedListTextView1.setText("Victories: " + expandedListText.getVictories());
+            TextView expandedListTextView1 = convertView.findViewById(R.id.expandedListItem1);
+            expandedListTextView1.setText(getString(R.string.victories_li) + expandedListText.getVictories());
 
-            Button btnThisProfile = (Button) convertView.findViewById(R.id.btnThisProfile);
+            ImageButton btnThisProfile = convertView.findViewById(R.id.btnThisProfile);
             btnThisProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(getApplicationContext(), MainActivity.class);
                     i.putExtra("THISPROFILE", expandedListText);
                     startActivity(i);
+                    finish();
+                }
+            });
+
+            ImageButton btnDeleteProfile = convertView.findViewById(R.id.btnDeleteThisProfile);
+            btnDeleteProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    existingProfiles.remove(listPosition);
+                    overrideExistingGamesFile(fileName);
+                    writeData(fileName);
+                    finish();
+                    if(existingProfiles.size() != 0)
+                        startActivity(getIntent());
+                    else{
+                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(i);
+                    }
                 }
             });
 

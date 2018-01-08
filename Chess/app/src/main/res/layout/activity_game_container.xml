@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,13 +14,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/grdvBoard"
-        app:layout_constraintEnd_toEndOf="@+id/grdvBoard"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentGameContainer"
+        app:layout_constraintEnd_toEndOf="@+id/fragmentGameContainer"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/grdvBoard"
+        app:layout_constraintStart_toStartOf="@+id/fragmentGameContainer"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/imgViewProfile2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -57,25 +59,32 @@
 
     </LinearLayout>
 
-    <GridView
-        android:id="@+id/grdvBoard"
+        <!--<GridView
+            android:id="@+id/grdvBoard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/board_brown"
+            android:cacheColorHint="@android:color/transparent"
+            android:foreground="@android:color/transparent"
+            android:foregroundTint="@android:color/transparent"
+            android:numColumns="8"/>-->
+    <fragment
+        android:id="@+id/fragmentGameContainer"
+        android:name="pt.isec.tp.amov.FragmentBoardContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/board_brown"
-        android:cacheColorHint="@android:color/transparent"
-        android:foreground="@android:color/transparent"
-        android:foregroundTint="@android:color/transparent"
-        android:numColumns="8"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
@@ -88,14 +97,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grdvBoard">
+        app:layout_constraintTop_toBottomOf="@+id/fragmentGameContainer">
 
         <ImageView
+            android:id="@+id/imgViewProfile1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/user"
-            android:contentDescription="Player 1 image" />
+            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/txtPlayer1"

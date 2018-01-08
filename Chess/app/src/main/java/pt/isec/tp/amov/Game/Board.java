@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import pt.isec.tp.amov.Constants;
 import pt.isec.tp.amov.Game.Pieces.Piece;
+import pt.isec.tp.amov.Game.Pieces.Queen;
 
 import static pt.isec.tp.amov.Constants.ATTACK;
 import static pt.isec.tp.amov.Constants.BISHOP_1;
@@ -200,7 +201,13 @@ public class Board implements Serializable {
                 p.setFirstMove(false);
                 p.setMode(2);
 
+                //verifica se o peao se encontra do lado oposto, caso contrario altera p/o tipo escolhido
+                pecaAMover = changePawnToOtherPiece(p, pecaAMover);
+                if(pecaAMover != null) {
+                    this.getTiles().get(pecaAMover.getX() * 8 + pecaAMover.getY()).setPiece(pecaAMover);
+                }
                 rePaintBoard(this);
+
             }
         } else if(idJogador == ERRO) {
             toPlay.setMode(1);
@@ -274,5 +281,39 @@ public class Board implements Serializable {
             }
         }
         return false;
+    }
+
+    public Piece changePawnToOtherPiece(Player play, Piece p){
+        if(play.getID() == 1){
+            //jogador 1
+            if(p.getX() == 0 && p.getType() == Constants.PAWN_1){
+                for(int i=0; i < play.getPieces().size(); i++){
+                    if(play.getPieces().get(i).getX() == p.getX() &&
+                            play.getPieces().get(i).getY() == p.getY()){
+                        play.getPieces().remove(i);
+                    }
+                }
+                //p.setType(Constants.QUEEN_1);
+                p = new Queen(Constants.QUEEN_1, p.getX(), p.getY());
+                play.getPieces().add(p);
+                //player1.setPieces(play.getPieces());
+                return p;
+            }
+        }else{
+            //jogador 2
+            if(p.getX() == 7 && p.getType() == Constants.PAWN_2){
+                for(int i=0; i < play.getPieces().size(); i++){
+                    if(play.getPieces().get(i).getX() == p.getX() &&
+                            play.getPieces().get(i).getY() == p.getY()){
+                        play.getPieces().remove(i);
+                    }
+                }
+                p = new Queen(Constants.QUEEN_2, p.getX(), p.getY());
+                play.getPieces().add(p);
+                //player2.setPieces(play.getPieces());
+                return p;
+            }
+        }
+        return null;
     }
 }

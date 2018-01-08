@@ -9,4 +9,18 @@
     <string name="txtTitulo">CHESS</string>
     <string name="txtSaveCurrentGame">Save current game ?</string>
     <string name="preferences">Preferences</string>
+    <string name="profile">Profile</string>
+    <string name="create_profile">Create Profile</string>
+    <string name="take_picture">Take picture</string>
+    <string name="profiles">Profiles</string>
+    <string name="enable_clock">Enable clock</string>
+    <string name="timer_p_game">Timer p/ game</string>
+    <string name="lan">LAN</string>
+    <string name="winner">Winner</string>
+    <string name="profileAtual">Profile:</string>
+    <string name="credits">Credits</string>
+    <string name="nome_li">Nome:</string>
+    <string name="victories_li">Victories:</string>
+    <string name="toast_profiel">Choose a profile to play with</string>
+    <string name="savedGames">Saved games</string>
 </resources>

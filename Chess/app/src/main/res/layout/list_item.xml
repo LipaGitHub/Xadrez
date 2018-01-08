@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_border"
+    android:backgroundTint="@color/colorCreamSquare">
 
     <ImageView
         android:id="@+id/imgViewPictureList"
@@ -21,6 +23,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="Name: "
+        android:textSize="18sp"
         android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"/>
@@ -31,18 +34,27 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:paddingBottom="10dp"
+            android:textSize="18sp"
             android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft"
             android:paddingTop="10dp"
             android:text="Victories: " />
     </LinearLayout>
 
-
-    <Button
-        android:id="@+id/btnThisProfile"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="@font/rythmus_regular"
-        android:text=">"
-        android:textSize="28sp"/>
+        android:orientation="vertical">
+        <ImageButton
+            android:id="@+id/btnThisProfile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@android:drawable/ic_media_play"/>
+        <ImageButton
+            android:id="@+id/btnDeleteThisProfile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@android:drawable/ic_delete"/>
+    </LinearLayout>
 </LinearLayout>

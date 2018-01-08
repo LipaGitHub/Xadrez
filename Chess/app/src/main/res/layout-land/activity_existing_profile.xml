@@ -3,14 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="pt.isec.tp.amov.ExistingProfile">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/txtProfiles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -18,7 +16,6 @@
         android:text="@string/profiles"
         android:textColor="@color/colorBrownSquare"
         android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/expandableProfiles"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -27,13 +24,14 @@
     <ExpandableListView
         android:id="@+id/expandableProfiles"
         android:layout_width="368dp"
-        android:layout_height="437dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
+        android:layout_height="244dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtProfiles" />
+
 </android.support.constraint.ConstraintLayout>

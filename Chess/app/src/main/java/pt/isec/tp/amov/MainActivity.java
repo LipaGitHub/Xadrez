@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,13 +14,24 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Locale;
+
+import pt.isec.tp.amov.Game.Board;
 
 public class MainActivity extends AppCompatActivity {
 
     // these two variables will be used by SharedPreferences
     private static final String FILE_NAME = "file_lang"; // preference file name
     private static final String KEY_LANG = "key_lang"; // preference key
+    private String fileName = "actualProfile.dat";
 
     Profile p;
 
@@ -35,7 +47,12 @@ public class MainActivity extends AppCompatActivity {
         TextView txtActualProfile = findViewById(R.id.txtActualProfile);
 
         if((p = (Profile) getIntent().getSerializableExtra("THISPROFILE")) != null){
-            txtActualProfile.setText("Profile: " + p.getName());
+            writeProfile(p);
+            txtActualProfile.setText(getString(R.string.profileAtual) + " " + p.getName());
+        }else{
+            p = readProfile(fileName);
+            if(p != null)
+                txtActualProfile.setText(getString(R.string.profileAtual) + " " + p.getName());
         }
     }
 
@@ -70,8 +87,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onMultiPlayerMenu(View v){
-        Intent i = new Intent(getApplicationContext(), MultiPlayerMenuActivity.class);
-        startActivity(i);
+        if(p != null) {
+            Intent i = new Intent(getApplicationContext(), MultiPlayerMenuActivity.class);
+            i.putExtra("PROFILECHOSEN", p);
+            startActivity(i);
+        }else {
+            Intent i = new Intent(getApplicationContext(), ExistingProfile.class);
+            startActivity(i);
+        }
     }
 
     public void onLanguageOption(View v){
@@ -108,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
     public void onExistingProfile(View v){
         Intent i = new Intent(getApplicationContext(), ExistingProfile.class);
         startActivity(i);
+        finish();
     }
 
     private void saveLanguage(String lang) {
@@ -127,6 +151,65 @@ public class MainActivity extends AppCompatActivity {
         String langCode = preferences.getString(KEY_LANG, "en");
         // save english 'en' as the default language
         return langCode;
+    }
+
+    public Profile readProfile(String fileName){
+        File file = new File(getApplicationContext().getFilesDir(), fileName);
+        try {
+            if(file.createNewFile()){
+                Log.i("1", "Ficheiro criado!");// if file already exists will do nothing
+            }else Log.i("2", "sqn");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+            Object aux;
+            aux = ois.readObject();
+            if(aux != null){
+                p = (Profile) aux;
+            }
+            ois.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return p;
+    }
+
+    public void writeProfile(Profile p){
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(fileName, MODE_PRIVATE);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(fos);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            oos.writeObject(p);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            oos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

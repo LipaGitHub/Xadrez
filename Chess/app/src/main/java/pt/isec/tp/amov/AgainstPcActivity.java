@@ -1,11 +1,17 @@
 package pt.isec.tp.amov;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,23 +24,16 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.TimeUnit;
 
 import pt.isec.tp.amov.Game.Board;
 import pt.isec.tp.amov.Game.Player;
@@ -50,6 +49,7 @@ public class AgainstPcActivity extends AppCompatActivity{
     Board board;
     Player player1, player2;
     TextView txtPlayer1, txtPlayer2;
+    ImageView imgViewProfile1, imgViewProfile2;
     String fileName = "OneVsPC.dat";
     ArrayList<Board> games;
 
@@ -60,9 +60,20 @@ public class AgainstPcActivity extends AppCompatActivity{
 
         txtPlayer1 = findViewById(R.id.txtPlayer1);
         txtPlayer2 = findViewById(R.id.txtPlayer2);
+        imgViewProfile1 = findViewById(R.id.imgViewProfile1);
+        imgViewProfile2 = findViewById(R.id.imgViewProfile2);
         boardGame = findViewById(R.id.grdvBoard);
         boardGame.setNumColumns(8);
         games = new ArrayList<>();
+
+        if(savedInstanceState != null) {
+            Fragment fr = new FragmentBoardContainer();
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.add(R.id.fragmentGameContainer, fr);
+            ft.commit();
+        }
+
         Profile pro;
 
         Bundle extras = getIntent().getExtras();
@@ -77,31 +88,33 @@ public class AgainstPcActivity extends AppCompatActivity{
                 Bundle args =  extras.getBundle("EXISTING_BOARD");
                 board = (Board) args.getSerializable("BOARD");
                 if(board != null){
-                    board.getPlayer1().setNome(pro.getName());
+                    //board.getPlayer1().setNome(pro.getName());
+                    board.getPlayer1().getProfile().setName(pro.getName());
+                    board.getPlayer1().getProfile().setImg(pro.getImg());
                     reCreateGame(board);
                 }
             }
-        }/*else {
-            games = readData(fileName);
+        }else {
+            //games = readData(fileName);
 
-            if (games.size() == 0) {
+            //if (games.size() == 0) {
                 //Create same game if rotated
                 if (savedInstanceState != null
                         && (savedInstanceState.getSerializable("dados") != null)) {
                     board = (Board) savedInstanceState.getSerializable("dados");
                     reCreateGame(board);
-                } else {
+                }// else {
                     //Create the first and new game
-                    newGame();
-                }
-            } else {
-                Intent i = new Intent(this, ExistingGames.class);
-                Bundle args = new Bundle();
-                args.putSerializable("ARRAYLIST", games);
-                i.putExtra("EXISTING_GAMES", args);
-                startActivityForResult(i, 1);
-            }
-        }*/
+                   // newGame();
+                //}
+            //} else {
+            //    Intent i = new Intent(this, ExistingGames.class);
+            //    Bundle args = new Bundle();
+            //    args.putSerializable("ARRAYLIST", games);
+            //    i.putExtra("EXISTING_GAMES", args);
+            //    startActivityForResult(i, 1);
+            //}
+        }
     }
 
     /*@Override
@@ -243,8 +256,8 @@ public class AgainstPcActivity extends AppCompatActivity{
                     mBuilder.setCancelable(false);
                     View mView = getLayoutInflater().inflate(R.layout.activity_winner, null);
                     TextView txtWinnerName = mView.findViewById(R.id.txtWinner);
-                    if(board.getWinner() == 1) txtWinnerName.append(" " + board.getPlayer1().getNome());
-                    else txtWinnerName.append(" " + board.getPlayer2().getNome());
+                    if(board.getWinner() == 1) txtWinnerName.append(" " + board.getPlayer1().getProfile().getName());
+                    else txtWinnerName.append(" " + board.getPlayer2().getProfile().getName());
                     mBuilder.setView(mView);
                     AlertDialog dialog = mBuilder.create();
                     dialog.show();
@@ -276,8 +289,8 @@ public class AgainstPcActivity extends AppCompatActivity{
     }
 
     public void createGame(Profile pro){
-        player1 = new Player(1, pro.getName());
-        player2 = new Player(2, "PC");
+        player1 = new Player(1, pro);
+        player2 = new Player(2, new Profile("PC", ""));
         //TODO: podemos ainda randomizar para ver quem comeca o jogo p.ex.
         board = new Board(player1, player2);
 
@@ -288,15 +301,24 @@ public class AgainstPcActivity extends AppCompatActivity{
         board.paintBoard();
         board.showPiecesOnBoard(player1, player2);
 
-        txtPlayer1.setText(player1.getNome());
-        txtPlayer2.setText(player2.getNome());
+        txtPlayer1.setText(player1.getProfile().getName());
+        txtPlayer2.setText(player2.getProfile().getName());
+
+        Bitmap bitmap;
+        byte [] encodeByte= Base64.decode(player1.getProfile().getImg(), Base64.DEFAULT);
+        bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+        imgViewProfile1.setImageBitmap(bitmap);
+
+        //encodeByte= Base64.decode(player2.getProfile().getImg(), Base64.DEFAULT);
+        //bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+        //imgViewProfile2.setImageBitmap(bitmap);
     }
 
     public void reCreateGame(Board b){
         player1 = b.getPlayer1();
         player2 = b.getPlayer2();
-        txtPlayer1.setText(b.getPlayer1().getNome());
-        txtPlayer2.setText(b.getPlayer2().getNome());
+        txtPlayer1.setText(b.getPlayer1().getProfile().getName());
+        txtPlayer2.setText(b.getPlayer2().getProfile().getName());
         boardGame.setAdapter(new AgainstPcActivity.GridViewAdapterSingle(this, b));
 
         boardGame.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -310,8 +332,8 @@ public class AgainstPcActivity extends AppCompatActivity{
                     mBuilder.setCancelable(false);
                     View mView = getLayoutInflater().inflate(R.layout.activity_winner, null);
                     TextView txtWinnerName = mView.findViewById(R.id.txtWinner);
-                    if(board.getWinner() == 1) txtWinnerName.append(" " + board.getPlayer1().getNome());
-                    else txtWinnerName.append(" " + board.getPlayer2().getNome());
+                    if(board.getWinner() == 1) txtWinnerName.append(" " + board.getPlayer1().getProfile().getName());
+                    else txtWinnerName.append(" " + board.getPlayer2().getProfile().getName());
                     mBuilder.setView(mView);
                     AlertDialog dialog = mBuilder.create();
                     dialog.show();
@@ -459,6 +481,7 @@ public class AgainstPcActivity extends AppCompatActivity{
         return games;
     }
 }
+
 
 /*
 class AppendingObjectOutputStream extends ObjectOutputStream {

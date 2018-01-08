@@ -33,7 +33,7 @@
         android:layout_marginTop="8dp"
         android:checked="true"
         android:fontFamily="@font/rythmus_regular"
-        android:text="Enable clock"
+        android:text="@string/enable_clock"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/linlayTimer"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +66,7 @@
             android:layout_weight="4"
             android:fontFamily="@font/rythmus_regular"
             android:gravity="start"
-            android:text="Timer p/ game"
+            android:text="@string/timer_p_game"
             android:textSize="25sp" />
 
         <EditText
@@ -89,7 +89,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/rythmus_regular"
-        android:text="LAN"
+        android:text="@string/lan"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -106,7 +106,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/rythmus_regular"
         android:onClick="onOneVersusOne"
-        android:text="1 vs 1"
+        android:text="@string/_1_vs_1"
         android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/btnEmRede"
         app:layout_constraintEnd_toEndOf="@+id/btnEmRede"

@@ -64,9 +64,11 @@ public class SinglePlayerActivity extends AppCompatActivity{
         txtTimerPlayer2 = findViewById(R.id.txtTimerPlayer2);
         boardGame = findViewById(R.id.grdvBoard);
         boardGame.setNumColumns(8);
+        Profile pro1;
 
         Bundle extras = getIntent().getExtras();
         if(extras != null){
+            pro1 = (Profile) extras.get("PROFILECHOSEN");
             board = (Board) extras.getSerializable("changeMode");
             if(board != null){
                 board.setTimer(0);
@@ -75,7 +77,7 @@ public class SinglePlayerActivity extends AppCompatActivity{
                 int time = extras.getInt("timer");
                 txtTimerPlayer1.setText(""+ time);
                 txtTimerPlayer2.setText(""+ time);
-                newGame(time);
+                newGame(time, pro1);
             }
         }
 
@@ -227,12 +229,8 @@ public class SinglePlayerActivity extends AppCompatActivity{
         }
     }
 
-    public void newGame(int time) {
-        //txtPlayer1 = findViewById(R.id.txtPlayer1);
-        //txtPlayer2 = findViewById(R.id.txtPlayer2);
-        //boardGame = findViewById(R.id.grdvBoard);
-        //boardGame.setNumColumns(8);
-        createGame(time);
+    public void newGame(int time, Profile pro) {
+        createGame(time, pro);
         boardGame.setAdapter(new SinglePlayerActivity.GridViewAdapterSingle(this, board));
         boardGame.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -245,8 +243,8 @@ public class SinglePlayerActivity extends AppCompatActivity{
                     mBuilder.setCancelable(false);
                     View mView = getLayoutInflater().inflate(R.layout.activity_winner, null);
                     TextView txtWinnerName = mView.findViewById(R.id.txtWinner);
-                    if(board.getWinner() == 1) txtWinnerName.append(" " + board.getPlayer1().getNome());
-                    else txtWinnerName.append(" " + board.getPlayer2().getNome());
+                    if(board.getWinner() == 1) txtWinnerName.append(" " + board.getPlayer1().getProfile().getName());
+                    else txtWinnerName.append(" " + board.getPlayer2().getProfile().getName());
                     mBuilder.setView(mView);
                     AlertDialog dialog = mBuilder.create();
                     dialog.show();
@@ -262,9 +260,9 @@ public class SinglePlayerActivity extends AppCompatActivity{
         });
     }
 
-    public void createGame(int time) {
-        player1 = new Player(1, "Dany");
-        player2 = new Player(2, "PC");
+    public void createGame(int time, Profile pro) {
+        player1 = new Player(1, pro);
+        player2 = new Player(2, new Profile("PC", "por_inserir"));
         //TODO: podemos ainda randomizar para ver quem comeca o jogo p.ex.
         board = new Board(player1, player2);
         board.setTimer(time);
@@ -276,14 +274,16 @@ public class SinglePlayerActivity extends AppCompatActivity{
         board.paintBoard();
         board.showPiecesOnBoard(player1, player2);
 
-        txtPlayer1.setText(player1.getNome());
-        txtPlayer2.setText(player2.getNome());
+        txtPlayer1.setText(player1.getProfile().getName());
+        txtPlayer2.setText(player2.getProfile().getName());
+        //imgViewProfile1.setImageBitmap(player1.getProfile().getImg()); //falta converter
+        //imgViewProfile2.setImageBitmap(player2.getProfile().getImg());
     }
 
     public void reCreateGame(Board b) {
         player1 = b.getPlayer1();
         player2 = b.getPlayer2();
-        txtPlayer1.setText(b.getPlayer1().getNome());
+        txtPlayer1.setText(b.getPlayer1().getProfile().getName());
         txtPlayer2.setText("Hirto");
         boardGame.setAdapter(new SinglePlayerActivity.GridViewAdapterSingle(this, b));
 
@@ -299,8 +299,8 @@ public class SinglePlayerActivity extends AppCompatActivity{
                     mBuilder.setCancelable(false);
                     View mView = getLayoutInflater().inflate(R.layout.activity_winner, null);
                     TextView txtWinnerName = mView.findViewById(R.id.txtWinner);
-                    if(board.getWinner() == 1) txtWinnerName.append(" " + board.getPlayer1().getNome());
-                    else txtWinnerName.append(" " + board.getPlayer2().getNome());
+                    if(board.getWinner() == 1) txtWinnerName.append(" " + board.getPlayer1().getProfile().getName());
+                    else txtWinnerName.append(" " + board.getPlayer2().getProfile().getName());
                     mBuilder.setView(mView);
                     AlertDialog dialog = mBuilder.create();
                     dialog.show();
@@ -321,78 +321,11 @@ public class SinglePlayerActivity extends AppCompatActivity{
     @Override
     public void onBackPressed() {
         //Player actualPlayer = board.getToPlay();
-
-        Intent i = new Intent(this, AgainstPcActivity.class);
-        i.putExtra("changeMode", board);
+        Intent i = new Intent(this, MainActivity.class);
+        //i.putExtra("changeMode", board);
         startActivity(i);
         //setResult(3, i);
         //startActivityForResult(i, 2);
         finish();
-        /*AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
-        View mView = getLayoutInflater().inflate(R.layout.activity_keep_changes, null);
-        final EditText edtNameGame = mView.findViewById(R.id.edtNameGame);
-        ImageButton imgbtnYes = mView.findViewById(R.id.imgbtnYes);
-        ImageButton imgbtnNo = mView.findViewById(R.id.imgbtnNo);
-        edtNameGame.setText(board.getName());
-        imgbtnYes.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                try {
-
-                    games = readData(fileName);
-                    board.setName(edtNameGame.getText().toString());
-
-                    int override = 0;
-                    for(int i=0; i < games.size();i++)
-                        if(games.get(i).getName().equals(board.getName())){
-                            games.set(i, board);
-                            override = 1;
-                        }//override existing game
-
-                    if(override != 1) { //if it's a new game then saves it
-                        games.add(board);
-                    }
-
-                    overrideExistingGamesFile(fileName);
-
-                    if(games.size() == 1){
-                        FileOutputStream fos = openFileOutput(fileName, MODE_APPEND);
-                        ObjectOutputStream oos = new ObjectOutputStream(fos);
-                        for(int i=0; i < games.size(); i++){
-                            oos.writeObject(games.get(i));
-                            //oos.flush();
-                        }
-                        oos.close();
-                        fos.close();
-                    }else{
-                        FileOutputStream fos = openFileOutput(fileName, MODE_APPEND);
-                        ObjectOutputStream aoos = new ObjectOutputStream(fos);
-                        for(int i=0; i < games.size(); i++){
-                            aoos.writeObject(games.get(i));
-                            //aoos.flush();
-                            //oos.writeObject(games.get(i));
-                            //oos.flush();
-                        }
-                        aoos.close();
-                        //oos.flush();
-                        //oos.close();
-                        fos.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                finish();
-            }
-        });
-        imgbtnNo.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        mBuilder.setView(mView);
-        AlertDialog dialog = mBuilder.create();
-        dialog.show();
-    }*/
     }
 }

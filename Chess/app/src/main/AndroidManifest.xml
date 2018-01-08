@@ -22,7 +22,8 @@
             android:label="You versus Enemy" />
         <activity
             android:name=".AgainstPcActivity"
-            android:label="You versus PC" />
+            android:label="You versus PC"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".LanguageOptionActivity" />
         <activity
             android:name=".MultiPlayerMenuActivity"
@@ -30,10 +31,11 @@
         <activity android:name=".EatenPiecesActivity" />
         <activity
             android:name=".ExistingGames"
-            android:label="Saved games" />
+            android:label="@string/savedGames"
+            android:screenOrientation="portrait"/>
         <!-- android:theme="@style/Base.Theme.AppCompat.Light.Dialog.Alert" -->
         <activity android:name=".ExistingProfile" />
-        <activity android:name=".CreateProfile"></activity>
+        <activity android:name=".CreateProfile"/>
     </application>
 
 </manifest>

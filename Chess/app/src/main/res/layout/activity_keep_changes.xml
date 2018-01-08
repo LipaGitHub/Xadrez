@@ -35,7 +35,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:hint="Name the game..."
-            android:text="game #1"
+            android:text="game1"
             android:fontFamily="@font/rythmus_regular"
             android:textStyle="italic"
             android:gravity="center"

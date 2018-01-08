@@ -20,11 +20,14 @@ public class MultiPlayerMenuActivity extends AppCompatActivity {
     CheckBox ckClock;
     LinearLayout layoutTimer;
     //EditText edtTimer;
+    Profile pro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menumultiplayer);
+
+        pro = (Profile) getIntent().getExtras().get("PROFILECHOSEN");
 
         ckClock = findViewById(R.id.ckClock);
         layoutTimer = findViewById(R.id.linlayTimer);
@@ -61,6 +64,7 @@ public class MultiPlayerMenuActivity extends AppCompatActivity {
         EditText edtTimer = findViewById(R.id.edtTimer);
         int time = Integer.parseInt(edtTimer.getText().toString());
         Intent i = new Intent(getApplicationContext(), SinglePlayerActivity.class);
+        i.putExtra("PROFILECHOSEN", pro);
         i.putExtra("timer", time);
         startActivity(i);
     }

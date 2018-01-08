@@ -66,6 +66,7 @@ public class ExistingGames extends AppCompatActivity {
                     Bundle args = new Bundle();
                     args.putSerializable("BOARD", b);
                     i.putExtra("EXISTING_BOARD", args);
+                    i.putExtra("PROFILECHOSEN", (Profile) getIntent().getExtras().get("PROFILECHOSEN"));
                     startActivity(i);
                     //setResult(1, i);
                 }
@@ -90,6 +91,7 @@ public class ExistingGames extends AppCompatActivity {
             case R.id.action_newGame:
                 Intent i = new Intent(this, AgainstPcActivity.class);
                 i.putExtra("newGame", 100);
+                i.putExtra("PROFILECHOSEN", (Profile) getIntent().getExtras().get("PROFILECHOSEN"));
                 startActivity(i);
                 finish();
                 //setResult(2, i);

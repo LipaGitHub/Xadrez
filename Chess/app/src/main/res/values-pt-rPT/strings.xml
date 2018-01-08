@@ -9,4 +9,16 @@
     <string name="txtTitulo">XADREZ</string>
     <string name="txtSaveCurrentGame">Guardar jogo ?</string>
     <string name="preferences">Preferências</string>
+    <string name="profile">Perfil</string>
+    <string name="create_profile">Criar Perfil</string>
+    <string name="take_picture">Tirar foto</string>
+    <string name="profiles">Perfis</string>
+    <string name="enable_clock">Ativar relógio</string>
+    <string name="timer_p_game">Tempo p/ jogo</string>
+    <string name="lan">Em rede</string>
+    <string name="winner">Vencedor</string>
+    <string name="profileAtual">Perfil:</string>
+    <string name="credits">Créditos</string>
+    <string name="nome_li">Nome:</string>
+    <string name="victories_li">Vitórias:</string>
 </resources>
