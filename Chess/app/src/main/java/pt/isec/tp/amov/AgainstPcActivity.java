@@ -66,54 +66,59 @@ public class AgainstPcActivity extends AppCompatActivity{
         boardGame.setNumColumns(8);
         games = new ArrayList<>();
 
-        if(savedInstanceState != null) {
-            Fragment fr = new FragmentBoardContainer();
+        if(savedInstanceState != null &&
+                (savedInstanceState.getSerializable("dados") != null)) {
+            board = (Board) savedInstanceState.getSerializable("dados");
+            reCreateGame(board);
+            /*Fragment fr = new FragmentBoardContainer();
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             ft.add(R.id.fragmentGameContainer, fr);
-            ft.commit();
-        }
-
-        Profile pro;
-
-        Bundle extras = getIntent().getExtras();
-        if(extras != null){
-            pro = (Profile) extras.get("PROFILECHOSEN");
-            board = (Board) extras.get("changeMode"); //em caso de ter alterado de 1vs1 (1 dispositivo) p/ 1 vs PC
-            if(board != null) {
-                reCreateGame(board); //recria jogo
-            }else if((extras.getInt("newGame")) == 100){ //primeiro jogo ever
-                newGame(pro);
-            }else{//jogar jogo existente
-                Bundle args =  extras.getBundle("EXISTING_BOARD");
-                board = (Board) args.getSerializable("BOARD");
-                if(board != null){
-                    //board.getPlayer1().setNome(pro.getName());
-                    board.getPlayer1().getProfile().setName(pro.getName());
-                    board.getPlayer1().getProfile().setImg(pro.getImg());
-                    reCreateGame(board);
-                }
-            }
+            ft.commit();*/
         }else {
-            //games = readData(fileName);
 
-            //if (games.size() == 0) {
+            Profile pro;
+
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                pro = (Profile) extras.get("PROFILECHOSEN");
+                board = (Board) extras.get("changeMode"); //em caso de ter alterado de 1vs1 (1 dispositivo) p/ 1 vs PC
+                if (board != null) {
+                    reCreateGame(board); //recria jogo
+                } else if ((extras.getInt("newGame")) == 100) { //primeiro jogo ever
+                    newGame(pro);
+                } else {//jogar jogo existente
+                    Bundle args = extras.getBundle("EXISTING_BOARD");
+                    board = (Board) args.getSerializable("BOARD");
+                    if (board != null) {
+                        //board.getPlayer1().setNome(pro.getName());
+                        board.getPlayer1().getProfile().setName(pro.getName());
+                        board.getPlayer1().getProfile().setImg(pro.getImg());
+                        reCreateGame(board);
+                    }
+                }
+            } else {
+
+                //games = readData(fileName);
+
+                //if (games.size() == 0) {
                 //Create same game if rotated
-                if (savedInstanceState != null
+                /*if (savedInstanceState != null
                         && (savedInstanceState.getSerializable("dados") != null)) {
                     board = (Board) savedInstanceState.getSerializable("dados");
-                    reCreateGame(board);
-                }// else {
-                    //Create the first and new game
-                   // newGame();
+                    reCreateGame(board);*/
+                //}// else {
+                //Create the first and new game
+                // newGame();
                 //}
-            //} else {
-            //    Intent i = new Intent(this, ExistingGames.class);
-            //    Bundle args = new Bundle();
-            //    args.putSerializable("ARRAYLIST", games);
-            //    i.putExtra("EXISTING_GAMES", args);
-            //    startActivityForResult(i, 1);
-            //}
+                //} else {
+                //    Intent i = new Intent(this, ExistingGames.class);
+                //    Bundle args = new Bundle();
+                //    args.putSerializable("ARRAYLIST", games);
+                //    i.putExtra("EXISTING_GAMES", args);
+                //    startActivityForResult(i, 1);
+                //}
+            }
         }
     }
 
