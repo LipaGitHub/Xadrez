@@ -17,7 +17,7 @@
             android:fontFamily="@font/rythmus_regular"
             android:textSize="30sp"
             android:text="1."
-            android:paddingStart="20dp"/>
+            android:textAlignment="textEnd"/>
 
         <TextView
             android:id="@+id/lrName"

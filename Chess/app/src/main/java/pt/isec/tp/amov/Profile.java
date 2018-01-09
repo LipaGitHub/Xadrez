@@ -15,40 +15,21 @@ public class Profile implements Serializable{
     private String name;
     private String img;
     private int victories;
-    private ArrayList<Board> profilegames;
+    private ArrayList<Board> winningBoards;
 
     Profile(String n, String img){
         this.name = n;
         this.img = img;
         this.victories = 0;
-        this.profilegames = new ArrayList<>();
+        this.winningBoards = new ArrayList<>();
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-
-    public int getVictories() {
-        return victories;
-    }
-
-    public void setVictories(int victories) {
-        this.victories = victories;
-    }
-
-    public ArrayList<Board> getProfilegames() { return profilegames; }
-
-    public void setProfilegames(ArrayList<Board> profilegames) { this.profilegames = profilegames; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getImg() { return img; }
+    public void setImg(String img) { this.img = img; }
+    public int getVictories() { return victories; }
+    public void setVictories(int victories) { this.victories = victories; }
+    public ArrayList<Board> getWinningBoards() { return winningBoards; }
+    public void setWinningBoards(ArrayList<Board> winningBoards) { this.winningBoards = winningBoards; }
 }

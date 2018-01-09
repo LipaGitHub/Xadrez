@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
@@ -54,6 +55,7 @@ public class AgainstPcActivity extends AppCompatActivity{
     ImageView imgViewProfile1, imgViewProfile2;
     String fileName = "OneVsPC.dat";
     ArrayList<Board> games;
+    String fileNameProfiles = "Profiles.dat";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -307,8 +309,26 @@ public class AgainstPcActivity extends AppCompatActivity{
                     mBuilder.setCancelable(false);
                     View mView = getLayoutInflater().inflate(R.layout.activity_winner, null);
                     TextView txtWinnerName = mView.findViewById(R.id.txtWinner);
-                    if(board.getWinner() == 1) txtWinnerName.append(" " + board.getPlayer1().getProfile().getName());
-                    else txtWinnerName.append(" " + board.getPlayer2().getProfile().getName());
+                    Button btnNext = mView.findViewById(R.id.btnNext);
+                    btnNext.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                            i.putExtra("THISPROFILE", board.getToPlay().getProfile());
+                            startActivity(i);
+                            finish();
+                        }
+                    });
+                    if(board.getWinner() == 1) {
+                        txtWinnerName.append(" " + board.getPlayer1().getProfile().getName());
+                        board.getPlayer1().getProfile().setVictories(board.getPlayer1().getProfile().getVictories()+1);
+                        board.setProfileWinner(board.getPlayer1().getProfile());
+                        saveProfile(board.getPlayer1().getProfile());
+                    }else {
+                        txtWinnerName.append(" " + board.getPlayer2().getProfile().getName());
+                        board.getPlayer2().getProfile().setVictories(board.getPlayer2().getProfile().getVictories()+1);
+                        board.setProfileWinner(board.getPlayer2().getProfile());
+                    }
                     mBuilder.setView(mView);
                     AlertDialog dialog = mBuilder.create();
                     dialog.show();
@@ -427,8 +447,30 @@ public class AgainstPcActivity extends AppCompatActivity{
                     mBuilder.setCancelable(false);
                     View mView = getLayoutInflater().inflate(R.layout.activity_winner, null);
                     TextView txtWinnerName = mView.findViewById(R.id.txtWinner);
-                    if(board.getWinner() == 1) txtWinnerName.append(" " + board.getPlayer1().getProfile().getName());
-                    else txtWinnerName.append(" " + board.getPlayer2().getProfile().getName());
+                    Button btnNext = mView.findViewById(R.id.btnNext);
+                    btnNext.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                            i.putExtra("THISPROFILE", board.getToPlay().getProfile());
+                            startActivity(i);
+                            finish();
+                        }
+                    });
+                    if(board.getWinner() == 1) {
+                        txtWinnerName.append(" " + board.getPlayer1().getProfile().getName());
+                        board.getPlayer1().getProfile().setVictories(board.getPlayer1().getProfile().getVictories()+1);
+                        ArrayList<Board> winningBoard = board.getPlayer1().getProfile().getWinningBoards();
+                        board.setProfileWinner(board.getPlayer1().getProfile());
+                        winningBoard.add(board);
+                        saveProfile(board.getPlayer1().getProfile());
+                    }else {
+                        txtWinnerName.append(" " + board.getPlayer2().getProfile().getName());
+                        board.getPlayer2().getProfile().setVictories(board.getPlayer1().getProfile().getVictories()+1);
+                        board.setProfileWinner(board.getPlayer2().getProfile());
+                        //saveProfile(board.getPlayer2().getProfile());
+                    }
+
                     mBuilder.setView(mView);
                     AlertDialog dialog = mBuilder.create();
                     dialog.show();
@@ -457,10 +499,6 @@ public class AgainstPcActivity extends AppCompatActivity{
                 //Toast.makeText(SinglePlayerActivity.this, "X: " + s.getX() + "\tY: " + s.getY(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    public void onProceedToResults(View v){
-        finish();
     }
 
     @Override
@@ -573,6 +611,70 @@ public class AgainstPcActivity extends AppCompatActivity{
             e.printStackTrace();
         }
         return games;
+    }
+
+    public void saveProfile(Profile p){
+        File file = new File(getFilesDir(), fileNameProfiles);
+
+        try {
+            if(file.createNewFile()){
+                Log.i("1", "Ficheiro criado!");// if file already exists will do nothing
+            }else {
+                Log.i("2", "sqn");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ObjectInputStream ois = null;
+        ObjectOutputStream oos = null;
+        try {
+            ois = new ObjectInputStream(new FileInputStream(file));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<Profile> array = new ArrayList<>();
+        Profile aux;
+        try {
+            while((aux = (Profile) ois.readObject()) != null){
+                array.add(aux);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            ois.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            oos = new ObjectOutputStream(new FileOutputStream(file));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for(int i=0; i < array.size(); i++){
+            if(array.get(i).getName().equals(p.getName())){
+                array.set(i, p);
+            }
+        }
+
+        for(int i=0; i < array.size(); i++){
+            try {
+                oos.writeObject(array.get(i));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        try {
+            oos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

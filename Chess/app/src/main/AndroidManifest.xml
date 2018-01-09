@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pt.isec.tp.amov">
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -16,12 +17,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SinglePlayerActivity" />
-        <activity android:name=".AgainstPcActivity" />
+        <activity
+            android:name=".SinglePlayerActivity"
+            android:label="You versus Enemy" />
+        <activity
+            android:name=".AgainstPcActivity"
+            android:label="You versus PC"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".LanguageOptionActivity" />
-        <activity android:name=".MultiPlayerMenuActivity" />
+        <activity
+            android:name=".MultiPlayerMenuActivity"
+            android:label="You versus Enemy (Network)" />
         <activity android:name=".EatenPiecesActivity" />
-        <activity android:name=".ProfileActivity"></activity>
+        <activity
+            android:name=".ExistingGames"
+            android:label="@string/savedGames"
+            android:screenOrientation="portrait"/>
+        <!-- android:theme="@style/Base.Theme.AppCompat.Light.Dialog.Alert" -->
+        <activity android:name=".ExistingProfile" />
+        <activity android:name=".CreateProfile"/>
     </application>
 
 </manifest>

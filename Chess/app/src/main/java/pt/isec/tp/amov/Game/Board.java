@@ -12,6 +12,7 @@ import pt.isec.tp.amov.Constants;
 import pt.isec.tp.amov.Game.Pieces.Piece;
 import pt.isec.tp.amov.Game.Pieces.Queen;
 import pt.isec.tp.amov.MainActivity;
+import pt.isec.tp.amov.Profile;
 import pt.isec.tp.amov.R;
 
 import static pt.isec.tp.amov.Constants.ATTACK;
@@ -47,6 +48,7 @@ public class Board implements Serializable{
     private Player toPlay;
     private int timer;
     private int winner;
+    private Profile profileWinner;
 
     public Board(Player p1, Player p2) {
         this.ID = contador++;
@@ -73,6 +75,14 @@ public class Board implements Serializable{
     public void setTimer(int timer) { this.timer = timer; }
     public int getWinner() { return winner; }
     public void setWinner(int winner) { this.winner = winner; }
+
+    public Profile getProfileWinner() {
+        return profileWinner;
+    }
+
+    public void setProfileWinner(Profile profileWinner) {
+        this.profileWinner = profileWinner;
+    }
 
     public void createBoard() {
         for (int i = 0; i < 8; i++) {

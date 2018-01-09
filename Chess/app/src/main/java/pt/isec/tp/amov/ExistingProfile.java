@@ -43,6 +43,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -95,6 +96,13 @@ public class ExistingProfile extends AppCompatActivity {
             for (int i = 0; i < existingProfiles.size(); i++) {
                 expandableProfile.put(existingProfiles.get(i).getName(), existingProfiles.get(i));
             }
+
+            /*Arrays.sort(existingProfiles, new Comparator<Profile>() {
+                @Override
+                public int compare(Profile o1, Profile o2) {
+                    return o1.getVictories().compareTo(o2.getVictories());
+                }
+            });*/
 
             //isto é para a lista do ranking
             CustomAdapter adapter = new CustomAdapter(existingProfiles,getApplicationContext());
@@ -178,6 +186,20 @@ public class ExistingProfile extends AppCompatActivity {
                     finish();
                     startActivity(getIntent()); //faz com que "atualize" ou seja faz reload da activity
                 }
+            }
+        }
+    }
+
+    public void sortProfilesPerVictories(ArrayList<Profile> array){
+        ArrayList<Profile> sorted = new ArrayList<>();
+        sorted.add(array.get(0));
+
+        for(int i=1; i < array.size(); i++){
+            if(sorted.get(0).getVictories() > array.get(i).getVictories()){
+                sorted.add(array.get(i));
+            }else{
+                sorted.set(1, sorted.get(0));
+
             }
         }
     }
