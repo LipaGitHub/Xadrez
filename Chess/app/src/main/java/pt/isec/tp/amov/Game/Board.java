@@ -1,11 +1,18 @@
 package pt.isec.tp.amov.Game;
 
+import android.support.v7.app.AlertDialog;
+import android.view.View;
+import android.widget.ImageButton;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import pt.isec.tp.amov.AgainstPcActivity;
 import pt.isec.tp.amov.Constants;
 import pt.isec.tp.amov.Game.Pieces.Piece;
 import pt.isec.tp.amov.Game.Pieces.Queen;
+import pt.isec.tp.amov.MainActivity;
+import pt.isec.tp.amov.R;
 
 import static pt.isec.tp.amov.Constants.ATTACK;
 import static pt.isec.tp.amov.Constants.BISHOP_1;
@@ -29,7 +36,7 @@ import static pt.isec.tp.amov.Constants.ROOK_2;
  * Created by Fajardo on 12/12/2017.
  */
 
-public class Board implements Serializable {
+public class Board implements Serializable{
 
     static int contador = 0;
     private int ID;
@@ -182,9 +189,25 @@ public class Board implements Serializable {
                     paintPossibleMoves(peca);
                     break;
             }
+            //return null;
         } else if (idJogador == MOVE || idJogador == ATTACK) {
             Player p = getToPlay();
             int res = this.getToPlay().getToMove().ataca(p, s);
+            if(p.getID() == 1){
+                for(int i=0; i < this.getPlayer2().getPieces().size();i++){
+                    if(s.getX() == this.getPlayer2().getPieces().get(i).getX() &&
+                            s.getY() == this.getPlayer2().getPieces().get(i).getY()){
+                        this.getPlayer2().getPieces().remove(i);
+                    }
+                }
+            }else{
+                for(int i=0; i < this.getPlayer1().getPieces().size();i++){
+                    if(s.getX() == this.getPlayer1().getPieces().get(i).getX() &&
+                            s.getY() == this.getPlayer1().getPieces().get(i).getY()){
+                        this.getPlayer1().getPieces().remove(i);
+                    }
+                }
+            }
 
             if (res == ATTACK) {
                 p.setFirstMove(false);
@@ -207,11 +230,13 @@ public class Board implements Serializable {
                     this.getTiles().get(pecaAMover.getX() * 8 + pecaAMover.getY()).setPiece(pecaAMover);
                 }
                 rePaintBoard(this);
-
+                //return pecaAMover; //que é para alterar para outra peça (de piao p/ outra peça)
             }
         } else if(idJogador == ERRO) {
             toPlay.setMode(1);
+            //return null;
         }
+        //return null;
     }
 
     public int whichPlayer(Squares s) {
@@ -293,10 +318,8 @@ public class Board implements Serializable {
                         play.getPieces().remove(i);
                     }
                 }
-                //p.setType(Constants.QUEEN_1);
                 p = new Queen(Constants.QUEEN_1, p.getX(), p.getY());
                 play.getPieces().add(p);
-                //player1.setPieces(play.getPieces());
                 return p;
             }
         }else{
@@ -310,7 +333,6 @@ public class Board implements Serializable {
                 }
                 p = new Queen(Constants.QUEEN_2, p.getX(), p.getY());
                 play.getPieces().add(p);
-                //player2.setPieces(play.getPieces());
                 return p;
             }
         }

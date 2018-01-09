@@ -36,6 +36,11 @@ import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 import pt.isec.tp.amov.Game.Board;
+import pt.isec.tp.amov.Game.Pieces.Bishop;
+import pt.isec.tp.amov.Game.Pieces.Knight;
+import pt.isec.tp.amov.Game.Pieces.Piece;
+import pt.isec.tp.amov.Game.Pieces.Queen;
+import pt.isec.tp.amov.Game.Pieces.Rook;
 import pt.isec.tp.amov.Game.Player;
 
 import static pt.isec.tp.amov.Constants.CRITICAL_MOVE;
@@ -62,6 +67,7 @@ public class AgainstPcActivity extends AppCompatActivity{
         txtPlayer2 = findViewById(R.id.txtPlayer2);
         imgViewProfile1 = findViewById(R.id.imgViewProfile1);
         imgViewProfile2 = findViewById(R.id.imgViewProfile2);
+
         boardGame = findViewById(R.id.grdvBoard);
         boardGame.setNumColumns(8);
         games = new ArrayList<>();
@@ -253,7 +259,50 @@ public class AgainstPcActivity extends AppCompatActivity{
         boardGame.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                board.verifyMove(position);
+                /*final Piece pawnChange = */board.verifyMove(position);
+                /*if(pawnChange != null){
+                    AlertDialog.Builder mBuilder = new AlertDialog.Builder( AgainstPcActivity.this);
+                    View mView = getLayoutInflater().inflate(R.layout.activity_change_pawn, null);
+                    ImageButton imgbtnBishop = mView.findViewById(R.id.imgbtnBishop);
+                    ImageButton imgbtnHorse = mView.findViewById(R.id.imgbtnhorse);
+                    ImageButton imgbtnQueen = mView.findViewById(R.id.imgbtnQueen);
+                    ImageButton imgbtnRook = mView.findViewById(R.id.imgbtnRook);
+                    mBuilder.setView(mView);
+                    AlertDialog dialog = mBuilder.create();
+                    dialog.show();
+                    imgbtnBishop.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Piece p = new Bishop(Constants.BISHOP_2, pawnChange.getX(), pawnChange.getY());
+                            board.getToPlay().getPieces().add(p);
+                            board.getTiles().get(p.getX() * 8 + p.getY()).setPiece(p);
+                        }
+                    });
+                    imgbtnHorse.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Piece p = new Knight(Constants.KNIGHT_2, pawnChange.getX(), pawnChange.getY());
+                            board.getToPlay().getPieces().add(p);
+                            board.getTiles().get(p.getX() * 8 + p.getY()).setPiece(p);
+                        }
+                    });
+                    imgbtnQueen.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Piece p = new Queen(Constants.QUEEN_2, pawnChange.getX(), pawnChange.getY());
+                            board.getToPlay().getPieces().add(p);
+                            board.getTiles().get(p.getX() * 8 + p.getY()).setPiece(p);
+                        }
+                    });
+                    imgbtnRook.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Piece p = new Rook(Constants.ROOK_2, pawnChange.getX(), pawnChange.getY());
+                            board.getToPlay().getPieces().add(p);
+                            board.getTiles().get(p.getX() * 8 + p.getY()).setPiece(p);
+                        }
+                    });
+                }*/
                 board.changePlayer(player1, player2);
                 ((AgainstPcActivity.GridViewAdapterSingle) boardGame.getAdapter()).notifyDataSetChanged(); //atualiza gridview
                 if(board.kingdefeated()){
@@ -287,6 +336,7 @@ public class AgainstPcActivity extends AppCompatActivity{
                         txtPlayer1.setBackgroundColor(Color.rgb(24, 14, 0));
                     }
                 }
+                ((AgainstPcActivity.GridViewAdapterSingle) boardGame.getAdapter()).notifyDataSetChanged();
                 //boardGame.setAdapter(new GridViewAdapterSingle(getApplicationContext(), board)); //atualiza gridview
                 //Toast.makeText(SinglePlayerActivity.this, "X: " + s.getX() + "\tY: " + s.getY(), Toast.LENGTH_SHORT).show();
             }
@@ -329,7 +379,50 @@ public class AgainstPcActivity extends AppCompatActivity{
         boardGame.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                board.verifyMove(position);
+                /*final Piece pawnChange = */board.verifyMove(position);
+                /*if(pawnChange != null){
+                    AlertDialog.Builder mBuilder = new AlertDialog.Builder( AgainstPcActivity.this);
+                    View mView = getLayoutInflater().inflate(R.layout.activity_change_pawn, null);
+                    ImageButton imgbtnBishop = mView.findViewById(R.id.imgbtnBishop);
+                    ImageButton imgbtnHorse = mView.findViewById(R.id.imgbtnhorse);
+                    ImageButton imgbtnQueen = mView.findViewById(R.id.imgbtnQueen);
+                    ImageButton imgbtnRook = mView.findViewById(R.id.imgbtnRook);
+                    mBuilder.setView(mView);
+                    AlertDialog dialog = mBuilder.create();
+                    dialog.show();
+                    imgbtnBishop.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Piece p = new Bishop(Constants.BISHOP_1, pawnChange.getX(), pawnChange.getY());
+                            board.getToPlay().getPieces().add(p);
+                            board.getTiles().get(p.getX() * 8 + p.getY()).setPiece(p);
+                        }
+                    });
+                    imgbtnHorse.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Piece p = new Knight(Constants.KNIGHT_1, pawnChange.getX(), pawnChange.getY());
+                            board.getToPlay().getPieces().add(p);
+                            board.getTiles().get(p.getX() * 8 + p.getY()).setPiece(p);
+                        }
+                    });
+                    imgbtnQueen.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Piece p = new Queen(Constants.QUEEN_1, pawnChange.getX(), pawnChange.getY());
+                            board.getToPlay().getPieces().add(p);
+                            board.getTiles().get(p.getX() * 8 + p.getY()).setPiece(p);
+                        }
+                    });
+                    imgbtnRook.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Piece p = new Rook(Constants.ROOK_1, pawnChange.getX(), pawnChange.getY());
+                            board.getToPlay().getPieces().add(p);
+                            board.getTiles().get(p.getX() * 8 + p.getY()).setPiece(p);
+                        }
+                    });
+                }*/
                 board.changePlayer(player1, player2);
                 ((AgainstPcActivity.GridViewAdapterSingle) boardGame.getAdapter()).notifyDataSetChanged(); //atualiza gridview
                 if(board.kingdefeated()){
@@ -363,7 +456,7 @@ public class AgainstPcActivity extends AppCompatActivity{
                         txtPlayer1.setBackgroundColor(Color.rgb(24, 14, 0));
                     }
                 }
-
+                ((AgainstPcActivity.GridViewAdapterSingle) boardGame.getAdapter()).notifyDataSetChanged();
                 //boardGame.setAdapter(new GridViewAdapterSingle(getApplicationContext(), board)); //atualiza gridview
                 //Toast.makeText(SinglePlayerActivity.this, "X: " + s.getX() + "\tY: " + s.getY(), Toast.LENGTH_SHORT).show();
             }
