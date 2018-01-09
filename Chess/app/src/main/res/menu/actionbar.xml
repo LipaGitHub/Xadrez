@@ -15,4 +15,11 @@
         android:icon="@android:drawable/ic_menu_myplaces"
         app:showAsAction="always"
         />
+    <item
+        android:id="@+id/action_login"
+        android:orderInCategory="90"
+        android:title="Login"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        app:showAsAction="always"
+        />
 </menu>
