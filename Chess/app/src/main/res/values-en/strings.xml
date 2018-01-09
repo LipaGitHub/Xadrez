@@ -23,4 +23,6 @@
     <string name="victories_li">Victories:</string>
     <string name="toast_profiel">Choose a profile to play with</string>
     <string name="savedGames">Saved games</string>
+    <string name="general">General</string>
+    <string name="ranking">Ranking</string>
 </resources>

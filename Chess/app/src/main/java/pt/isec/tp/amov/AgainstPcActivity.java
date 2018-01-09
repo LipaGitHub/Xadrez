@@ -1,8 +1,5 @@
 package pt.isec.tp.amov;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -456,7 +453,6 @@ public class AgainstPcActivity extends AppCompatActivity{
                         txtPlayer1.setBackgroundColor(Color.rgb(24, 14, 0));
                     }
                 }
-                ((AgainstPcActivity.GridViewAdapterSingle) boardGame.getAdapter()).notifyDataSetChanged();
                 //boardGame.setAdapter(new GridViewAdapterSingle(getApplicationContext(), board)); //atualiza gridview
                 //Toast.makeText(SinglePlayerActivity.this, "X: " + s.getX() + "\tY: " + s.getY(), Toast.LENGTH_SHORT).show();
             }

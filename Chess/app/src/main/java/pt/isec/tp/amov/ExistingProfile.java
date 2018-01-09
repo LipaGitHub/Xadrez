@@ -19,14 +19,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -36,6 +42,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -44,6 +51,8 @@ public class ExistingProfile extends AppCompatActivity {
 
     String fileName = "Profiles.dat";
     ArrayList<Profile> existingProfiles;
+    TabHost tbGeneral;
+    ListView lvRanking;
 
 
     ExpandableListView expandableListView;
@@ -56,6 +65,22 @@ public class ExistingProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_existing_profile);
 
+        tbGeneral = findViewById(R.id.thProfiles);
+        tbGeneral.setup();
+
+        //Tab 1
+        TabHost.TabSpec spec = tbGeneral.newTabSpec("Tab One");
+        spec.setContent(R.id.tab1);
+        spec.setIndicator(getString(R.string.profiles));
+        tbGeneral.addTab(spec);
+
+        //Tab 2
+        spec = tbGeneral.newTabSpec("Tab Two");
+        spec.setContent(R.id.tab2);
+        spec.setIndicator(getString(R.string.ranking));
+        tbGeneral.addTab(spec);
+
+        lvRanking = findViewById(R.id.listRanking);
         expandableListView = findViewById(R.id.expandableProfiles);
         existingProfiles = new ArrayList<>();
         HashMap<String, Profile> expandableProfile = new HashMap<>();
@@ -64,11 +89,19 @@ public class ExistingProfile extends AppCompatActivity {
 
         //ler do ficheiro
         existingProfiles = readData(fileName);
+
         if(existingProfiles.size() > 0) {
             //se existir pôr na HashMap
             for (int i = 0; i < existingProfiles.size(); i++) {
                 expandableProfile.put(existingProfiles.get(i).getName(), existingProfiles.get(i));
             }
+
+            //isto é para a lista do ranking
+            CustomAdapter adapter = new CustomAdapter(existingProfiles,getApplicationContext());
+            TextView tv = new TextView(this);
+            tv.setText("ID:\t\t\tName:\t\t\tVictories:");
+            lvRanking.addHeaderView(tv);
+            lvRanking.setAdapter(adapter);
 
             expandableListDetail = expandableProfile;
             expandableListTitle = new ArrayList<>(expandableListDetail.keySet());
@@ -340,7 +373,7 @@ public class ExistingProfile extends AppCompatActivity {
             }
             TextView listTitleTextView = (TextView) convertView
                     .findViewById(R.id.listTitle);
-            listTitleTextView.setTypeface(null, Typeface.BOLD);
+            //listTitleTextView.setTypeface(null, Typeface.BOLD);
             listTitleTextView.setText(listTitle);
             return convertView;
         }
@@ -354,5 +387,39 @@ public class ExistingProfile extends AppCompatActivity {
         public boolean isChildSelectable(int listPosition, int expandedListPosition) {
             return true;
         }
+    }
+
+    public class CustomAdapter extends ArrayAdapter<Profile>{
+        public ArrayList<Profile> dataSet;
+        Context mContext;
+
+        private CustomAdapter(ArrayList<Profile> data, Context context) {
+            super(context, R.layout.adapter_list_ranking, data);
+            this.dataSet = data;
+            this.mContext=context;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View res;
+            Profile pro = dataSet.get(position);
+            TextView txtID, txtName, txtVic;
+
+            if (convertView == null) {
+                LayoutInflater inflater = (LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(R.layout.adapter_list_ranking, parent, false);
+                res = convertView;
+            }else{
+                res = convertView;
+            }
+            txtID = convertView.findViewById(R.id.lrID);
+            txtName = convertView.findViewById(R.id.lrName);
+            txtVic = convertView.findViewById(R.id.lrVic);
+            txtID.setText("" + (position+1));
+            txtName.setText(pro.getName());
+            txtVic.setText("" + pro.getVictories());
+            return res;
+        }
+
     }
 }

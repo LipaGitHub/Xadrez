@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lrID"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/rythmus_regular"
+            android:textSize="30sp"
+            android:text="1."
+            android:paddingStart="20dp"/>
+
+        <TextView
+            android:id="@+id/lrName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:textSize="30sp"
+            android:fontFamily="@font/rythmus_regular"
+            android:gravity="center"
+            android:text="Hirto"/>
+
+        <TextView
+            android:id="@+id/lrVic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:textSize="30sp"
+            android:fontFamily="@font/rythmus_regular"
+            android:text="0"/>
+    </LinearLayout>
+
+</RelativeLayout>
