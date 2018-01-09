@@ -45,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_language:
                 onLanguageOption(findViewById(R.id.action_language));
                 break;
+            case R.id.action_login:
+                Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(i);
+                break;
         }
         return true;
     }

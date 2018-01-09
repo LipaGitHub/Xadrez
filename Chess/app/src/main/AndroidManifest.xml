@@ -17,10 +17,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".SinglePlayerActivity" />
-        <activity android:name=".AgainstPcActivity"/>
+        <activity android:name=".AgainstPcActivity" />
         <activity android:name=".LanguageOptionActivity" />
         <activity android:name=".MultiPlayerMenuActivity" />
         <activity android:name=".EatenPiecesActivity" />
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>

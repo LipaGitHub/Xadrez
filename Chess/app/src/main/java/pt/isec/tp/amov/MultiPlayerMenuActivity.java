@@ -29,13 +29,13 @@ public class MultiPlayerMenuActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(!ckClock.isChecked()) {
                     FragmentManager fm = getFragmentManager();
-                    ClockFragment c = (ClockFragment) fm.findFragmentByTag("Clock");
+                    //ClockFragment c = (ClockFragment) fm.findFragmentByTag("Clock");
                     FragmentTransaction ft = fm.beginTransaction();
-                    if(c != null){
+                  /*  if(c != null){
                         ft.remove(c);
                         ft.commit();
                     }
-
+*/
                 }
             }
         });
@@ -45,8 +45,8 @@ public class MultiPlayerMenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ClockFragment c = new ClockFragment();
-                ft.add(R.id.frgClock, c, "Clock");
+                //ClockFragment c = new ClockFragment();
+               // ft.add(R.id.frgClock, c, "Clock");
                 ft.commit();
             }
         });
