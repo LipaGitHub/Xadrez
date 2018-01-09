@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/button_border"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+        <TextView
+            android:id="@+id/txtID"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:fontFamily="@font/rythmus_regular"
+            android:textStyle="bold"
+            android:background="@drawable/round_enum"/>
+
+        <TextView
+            android:id="@+id/txtGame"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="start"
+            android:textStyle="bold"
+            android:fontFamily="@font/rythmus_regular"
+            android:layout_marginTop="15sp"
+            android:textSize="32sp"
+            android:paddingStart="20dp"/>
+
+        <TextView
+            android:id="@+id/txtGameInfo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="clip_horizontal"
+            android:background="@android:drawable/ic_media_play"
+            android:backgroundTint="@color/colorBrownSquare"
+            android:fontFamily="@font/rythmus_regular"
+            android:layout_marginTop="15sp"
+            android:textSize="32sp"/>
+    </LinearLayout>
+</LinearLayout>

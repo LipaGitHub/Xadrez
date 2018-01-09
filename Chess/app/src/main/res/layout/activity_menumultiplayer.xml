@@ -14,10 +14,12 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/rythmus_regular"
         android:gravity="center"
-        android:text="Preferences"
+        android:text="@string/preferences"
         android:textColor="@color/colorBrownSquare"
         android:textSize="35sp"
+        app:layout_constraintBottom_toTopOf="@+id/ckClock"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,55 +27,91 @@
         android:id="@+id/ckClock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
+        android:checked="true"
         android:fontFamily="@font/rythmus_regular"
-        android:text="Enable clock"
+        android:text="@string/enable_clock"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/linlayTimer"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <LinearLayout
+        android:id="@+id/linlayTimer"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/btn1contra1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ckClock">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:drawable/ic_menu_recent_history" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="4"
+            android:fontFamily="@font/rythmus_regular"
+            android:gravity="start"
+            android:text="@string/timer_p_game"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/edtTimer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:text="10"
+            android:inputType="number" />
+    </LinearLayout>
 
 
     <Button
         android:id="@+id/btnEmRede"
-        android:layout_width="wrap_content"
+        android:layout_width="236dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="120dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/rythmus_regular"
-        android:text="LAN"
+        android:text="@string/lan"
+        android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn1contra1" />
 
     <Button
         android:id="@+id/btn1contra1"
-        android:layout_width="wrap_content"
+        android:layout_width="236dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/rythmus_regular"
-        android:text="1 vs 1"
+        android:onClick="onOneVersusOne"
+        android:text="@string/_1_vs_1"
+        android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/btnEmRede"
         app:layout_constraintEnd_toEndOf="@+id/btnEmRede"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/btnEmRede"
-        app:layout_constraintTop_toBottomOf="@+id/ckClock"
-        android:onClick="onGame"/>
-
-    <RelativeLayout
-        android:id="@+id/frgClock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn1contra1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/linlayTimer" />
 
 </android.support.constraint.ConstraintLayout>

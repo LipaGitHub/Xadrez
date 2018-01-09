@@ -56,5 +56,41 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/fr" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/boxborder">
+            <TextView
+                android:id="@+id/txtCredits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/credits"
+                android:textSize="32sp"
+                android:fontFamily="@font/rythmus_regular"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/txtCreditsDany"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/a21240085_dany_fajardo"
+                android:textSize="20sp"
+                android:fontFamily="@font/rythmus_regular"
+                />
+            <TextView
+                android:id="@+id/txtCreditsFilipa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/a21240062_filipa_sousa"
+                android:textSize="20sp"
+                android:fontFamily="@font/rythmus_regular"
+                />
+        </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

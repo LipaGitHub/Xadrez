@@ -95,7 +95,7 @@ public class Pawn extends Piece implements Serializable {
 
     @Override
     public int ataca(Player p, Squares s){
-        if(s.isOccupied() == false) {
+        if(!s.isOccupied()){
             for(int i=0; i < getPossibleMoves().size(); i++){
                 if(getPossibleMoves().get(i) == s.getID()){
                     s.setPiece(this);

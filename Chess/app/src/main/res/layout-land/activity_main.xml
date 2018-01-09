@@ -14,7 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/rythmus_regular"
-        android:text="@string/app_name"
+        android:text="@string/txtTitulo"
         android:textColor="@color/colorBrownSquare"
         android:textSize="80sp"
         app:layout_constraintEnd_toEndOf="@+id/btnMultiPlayer"
@@ -32,7 +32,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/rythmus_regular"
-        android:onClick="onSinglePlayer"
+        android:onClick="onAgainstPC"
         android:text="@string/txtSinglePlayer"
         android:textSize="32sp"
         android:drawableEnd="@mipmap/ic_user"
@@ -51,7 +51,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/rythmus_regular"
-        android:onClick="onMultiPlayer"
+        android:onClick="onMultiPlayerMenu"
         android:text="@string/txtMultiPlayer"
         android:textSize="32sp"
         android:drawableEnd="@mipmap/ic_users"
@@ -60,5 +60,18 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnSinglePlayer"
         app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+    <TextView
+        android:id="@+id/txtActualProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/rythmus_regular"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMultiPlayer" />
 
 </android.support.constraint.ConstraintLayout>

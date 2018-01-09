@@ -5,7 +5,14 @@
         android:id="@+id/action_language"
         android:orderInCategory="100"
         android:title="Language"
-        android:icon="@android:drawable/ic_menu_mapmode"
+        android:icon="@android:drawable/ic_menu_manage"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/action_profile"
+        android:orderInCategory="90"
+        android:title="Profile"
+        android:icon="@android:drawable/ic_menu_myplaces"
         app:showAsAction="always"
         />
     <item

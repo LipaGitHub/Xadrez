@@ -8,4 +8,17 @@
     <string name="lblPlayer1">PLAYER 1</string>
     <string name="txtTitulo">ECHEC</string>
     <string name="txtSaveCurrentGame">Sauvegarder la partie ?</string>
+    <string name="preferences">Préférences</string>
+    <string name="profile">Profil</string>
+    <string name="create_profile">Créer Profil</string>
+    <string name="take_picture">Prendre photo</string>
+    <string name="profiles">Profils</string>
+    <string name="enable_clock">Activer horloge</string>
+    <string name="timer_p_game">Temps p/ jeu</string>
+    <string name="lan">En ligne</string>
+    <string name="winner">Vainqueur</string>
+    <string name="profileAtual">Profil:</string>
+    <string name="credits">Crédits</string>
+    <string name="nome_li">Nom:</string>
+    <string name="victories_li">Victoires:</string>
 </resources>
