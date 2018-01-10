@@ -7,26 +7,21 @@ import android.view.View;
 
 public class RemoteMenuActivity extends AppCompatActivity {
 
-    Profile p;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remote_menu);
-        p = (Profile) getIntent().getSerializableExtra("THISPROFILE");
     }
 
     public void onServer(View v){
         Intent intent=new Intent(this, RemoteActivity.class);
         intent.putExtra("mode", Constants.SERVER);
-        intent.putExtra("PROFILECHOSEN", p);
         startActivity(intent);
     }
 
     public void onClient(View v){
         Intent intent=new Intent(this, RemoteActivity.class);
         intent.putExtra("mode", Constants.CLIENT);
-        intent.putExtra("PROFILECHOSEN", p);
         startActivity(intent);
     }
 }
