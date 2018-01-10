@@ -18,6 +18,7 @@ public class MultiPlayerMenuActivity extends AppCompatActivity {
 
     CheckBox ckClock;
     Button btnRemote;
+    Profile p;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +28,13 @@ public class MultiPlayerMenuActivity extends AppCompatActivity {
         ckClock = findViewById(R.id.ckClock);
         btnRemote = findViewById(R.id.btnEmRede);
 
+        p = (Profile) getIntent().getSerializableExtra("PROFILECHOSEN");
+
         btnRemote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), RemoteMenuActivity.class);
+                i.putExtra("THISPROFILE", p);
                 startActivity(i);
             }
         });
