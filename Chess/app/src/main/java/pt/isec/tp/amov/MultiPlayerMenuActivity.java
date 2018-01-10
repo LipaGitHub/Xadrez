@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
@@ -16,6 +17,7 @@ import android.widget.CompoundButton;
 public class MultiPlayerMenuActivity extends AppCompatActivity {
 
     CheckBox ckClock;
+    Button btnRemote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,15 @@ public class MultiPlayerMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menumultiplayer);
 
         ckClock = findViewById(R.id.ckClock);
+        btnRemote = findViewById(R.id.btnEmRede);
+
+        btnRemote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), RemoteMenuActivity.class);
+                startActivity(i);
+            }
+        });
 
         ckClock.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

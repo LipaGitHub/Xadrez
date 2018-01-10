@@ -29,6 +29,11 @@ public interface Constants {
     int ROOK_2 = R.drawable.yellow_r;
     int KNIGHT_2 = R.drawable.yellow_n;
 
+    int CLIENT = 1;
+    int SERVER = 0;
+    int PORT = 8899;
+    int PORTaux = 9988;
+
 
 
 }
