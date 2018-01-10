@@ -336,9 +336,11 @@ public class ExistingProfile extends AppCompatActivity {
             btnThisProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent i = new Intent(getApplicationContext(), SinglePlayerActivity.class);
                     i.putExtra("THISPROFILE", expandedListText);
-                    startActivity(i);
+                    //finish();
+                    setResult(1, i);
+                    //startActivity(i);
                     finish();
                 }
             });

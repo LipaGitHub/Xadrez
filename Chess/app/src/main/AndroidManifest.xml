@@ -19,7 +19,8 @@
         </activity>
         <activity
             android:name=".SinglePlayerActivity"
-            android:label="You versus Enemy" />
+            android:label="You versus Enemy"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".AgainstPcActivity"
             android:label="You versus PC"

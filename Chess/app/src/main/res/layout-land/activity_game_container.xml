@@ -23,7 +23,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/user"
             android:contentDescription="Player 2 image" />
 
         <TextView
@@ -103,7 +102,7 @@
         tools:layout="@layout/fragment_chess_board" />
 
     <Button
-        android:id="@+id/imageButton"
+        android:id="@+id/btnChangeMode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -111,8 +110,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:drawableTop="@android:drawable/ic_popup_sync"
-        android:text="Change Mode"
+        android:text="@string/change_mode"
         android:textSize="15sp"
+        android:onClick="onChangeMode"
         android:fontFamily="@font/rythmus_regular"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toStartOf="@+id/fragmentGameContainer"

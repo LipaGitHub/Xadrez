@@ -52,6 +52,7 @@ import static pt.isec.tp.amov.Constants.CRITICAL_MOVE;
 
 public class AgainstPcActivity extends AppCompatActivity{
     GridView boardGame, eatenPieces;
+    Button btnChangeMode;
     Board board;
     Player player1, player2;
     TextView txtPlayer1, txtPlayer2;
@@ -67,6 +68,8 @@ public class AgainstPcActivity extends AppCompatActivity{
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_game_container);
 
+        //btnChangeMode = findViewById(R.id.btnChangeMode);
+        //btnChangeMode.setVisibility(View.INVISIBLE); //nao é necessario este butao neste modo de jogo
         txtPlayer1 = findViewById(R.id.txtPlayer1);
         txtPlayer2 = findViewById(R.id.txtPlayer2);
         imgViewProfile1 = findViewById(R.id.imgViewProfile1);
@@ -367,7 +370,7 @@ public class AgainstPcActivity extends AppCompatActivity{
 
     public void createGame(Profile pro){
         player1 = new Player(1, pro);
-        player2 = new Player(2, new Profile("PC", ""));
+        player2 = new Player(2, new Profile("PC", "drawable://" + R.drawable.user));
         //TODO: podemos ainda randomizar para ver quem comeca o jogo p.ex.
         board = new Board(player1, player2);
 
@@ -385,6 +388,10 @@ public class AgainstPcActivity extends AppCompatActivity{
         byte [] encodeByte= Base64.decode(player1.getProfile().getImg(), Base64.DEFAULT);
         bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
         imgViewProfile1.setImageBitmap(bitmap);
+
+        encodeByte= Base64.decode(player2.getProfile().getImg(), Base64.DEFAULT);
+        bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+        imgViewProfile2.setImageBitmap(bitmap);
     }
 
     public void reCreateGame(Board b){
@@ -396,6 +403,10 @@ public class AgainstPcActivity extends AppCompatActivity{
         byte [] encodeByte= Base64.decode(player1.getProfile().getImg(), Base64.DEFAULT);
         bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
         imgViewProfile1.setImageBitmap(bitmap);
+
+        encodeByte= Base64.decode(player2.getProfile().getImg(), Base64.DEFAULT);
+        bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+        imgViewProfile2.setImageBitmap(bitmap);
         boardGame.setAdapter(new AgainstPcActivity.GridViewAdapterSingle(this, b));
 
         boardGame.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -504,6 +515,14 @@ public class AgainstPcActivity extends AppCompatActivity{
                 //Toast.makeText(SinglePlayerActivity.this, "X: " + s.getX() + "\tY: " + s.getY(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void onChangeMode(View v){
+        Intent i = new Intent(this, SinglePlayerActivity.class);
+        i.putExtra("PROFILECHOSEN", board.getPlayer1().getProfile());
+        i.putExtra("changeMode", board);
+        startActivity(i);
+        finish();
     }
 
     @Override
